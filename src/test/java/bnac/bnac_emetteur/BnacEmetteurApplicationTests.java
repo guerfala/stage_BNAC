@@ -1,4 +1,4 @@
-package com.example.bnac_emetteur;
+package bnac.bnac_emetteur;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
