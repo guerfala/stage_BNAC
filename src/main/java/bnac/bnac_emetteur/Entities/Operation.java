@@ -17,19 +17,25 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int IdOperation;
 
-    private int Matricule;
+    @ManyToOne
+    @JoinColumn(name="Matricule")
+    private Actionnaire actionnaire;
 
-    @Column(nullable = false, length = 16)
-    private String IdEmetteur;
+    @JoinColumn(name = "IdEmetteur", nullable = false)
+    @ManyToOne
+    private Emetteur emetteur;
 
-    @Column(nullable = true, length = 3)
-    private String IdTC;
+    @JoinColumn(name = "IdTC",nullable = true)
+    @ManyToOne
+    private TeneurCompte teneurCompte;
 
-    @Column(nullable = true)
-    private int IdNatureCompteTitre;
+    @JoinColumn(name = "IdNatureCompteTitre", nullable = true)
+    @ManyToOne
+    private NatureCompteTitre natureCompteTitre;
 
-    @Column(nullable = true)
-    private int IdNatureAvoirs;
+    @JoinColumn(name = "IdNatureAvoirs", nullable = true)
+    @ManyToOne
+    private NatureAvoir natureAvoir;
 
     @Column(nullable = true, length = 3)
     private String IdTC2;
@@ -37,11 +43,13 @@ public class Operation {
     @Column(nullable = true)
     private int Matricule2;
 
-    @Column(nullable = true, length = 8)
-    private String IdTitre;
+    @JoinColumn(name = "IdTitre", nullable = true)
+    @ManyToOne
+    private Titre titre;
 
-    @Column(nullable = true, length = 4)
-    private String IdTypeOperation;
+    @JoinColumn(name = "IdTypeOperation", nullable = true)
+    @ManyToOne
+    private TypeOperation typeOperation;
 
     @Column(nullable = false)
     private int Quantite;

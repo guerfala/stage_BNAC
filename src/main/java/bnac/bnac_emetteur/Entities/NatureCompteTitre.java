@@ -13,7 +13,7 @@ public class NatureCompteTitre {
     @Column(length =64,nullable = false)
     private String Libelle;
 
-    @Column(name="CodeNatureCompteTitre", length =2,nullable = false)
+    @Column(length =2,nullable = false)
     private String CodeNatureCompteTitre;
 
 }
