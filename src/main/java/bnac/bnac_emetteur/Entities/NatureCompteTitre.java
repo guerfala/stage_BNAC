@@ -7,13 +7,13 @@ import jakarta.persistence.*;
 public class NatureCompteTitre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdNatureCompteTitre", nullable = false)
+    @Column(nullable = false)
     private int IdNatureCompteTitre;
 
-    @Column(name="Libelle", length =64,nullable = false)
+    @Column(length =64,nullable = false)
     private String Libelle;
 
-    @Column(name="CodeNatureCompteTitre", length =2,nullable = false)
+    @Column(length =2,nullable = false)
     private String CodeNatureCompteTitre;
 
 }
