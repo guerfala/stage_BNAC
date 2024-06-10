@@ -1,4 +1,4 @@
-package banc.bnac_emetteur.Entities;
+package bnac.bnac_emetteur.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,9 +19,10 @@ public class Operation {
 
     private int Matricule;
 
+    @Column(nullable = false, length = 16)
     private String IdEmetteur;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 3)
     private String IdTC;
 
     @Column(nullable = true)
@@ -30,17 +31,19 @@ public class Operation {
     @Column(nullable = true)
     private int IdNatureAvoirs;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 3)
     private String IdTC2;
 
     @Column(nullable = true)
     private int Matricule2;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 8)
     private String IdTitre;
 
+    @Column(nullable = true, length = 4)
     private String IdTypeOperation;
 
+    @Column(nullable = false)
     private int Quantite;
 
     @Column(nullable = true)
@@ -52,13 +55,13 @@ public class Operation {
     @Column(nullable = true)
     private LocalDateTime DateBourse;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 16)
     private String NumContrat;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 32)
     private String Creancier;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 32)
     private String RefOperation;
 
     @Column(nullable = true)
@@ -70,16 +73,16 @@ public class Operation {
     @Column(nullable = true)
     private boolean Pur;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 1)
     private String Parametre1;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 1)
     private String Parametre2;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 16)
     private String IdOperationBO;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 16)
     private String IdEmprunt;
 
     @Column(nullable = true)
