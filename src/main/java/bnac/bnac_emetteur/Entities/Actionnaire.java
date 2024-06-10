@@ -17,14 +17,16 @@ public class Actionnaire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Matricule;
 
-    @Column(nullable = false, length = 16)
-    private String IdEmetteur;
+    @JoinColumn(name = "IdEmetteur", nullable = false)
+    @ManyToOne
+    private Emetteur emetteur;
 
     @Column(nullable = false, length = 128)
     private String RaisonSociale;
 
-    @Column(nullable = true)
-    private int IdNatureAvoirs;
+    @JoinColumn(name = "IdNatureAvoirs", nullable = true)
+    @ManyToOne
+    private NatureAvoir natureAvoir;
 
     @Column(nullable = true, length = 128)
     private String Adresse;
