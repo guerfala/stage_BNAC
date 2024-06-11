@@ -33,4 +33,18 @@ public class NatureAvoirService {
     public void deleteAllNatureAvoirs() {
         natureAvoirRepository.deleteAll();
     }
+
+    public NatureAvoir updateNatureAvoir(int id, NatureAvoir updatedNatureAvoir) {
+        Optional<NatureAvoir> existingNatureAvoirOptional = natureAvoirRepository.findById(id);
+        if (existingNatureAvoirOptional.isPresent()) {
+            NatureAvoir existingNatureAvoir = existingNatureAvoirOptional.get();
+            existingNatureAvoir.setLibelle(updatedNatureAvoir.getLibelle());
+            existingNatureAvoir.setCodeCategorieAvoir(updatedNatureAvoir.getCodeCategorieAvoir());
+            // You can add more fields if needed
+
+            return natureAvoirRepository.save(existingNatureAvoir);
+        } else {
+            return null;
+        }
+    }
 }

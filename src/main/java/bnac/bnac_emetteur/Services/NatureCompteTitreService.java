@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NatureCompteTitreService {
@@ -14,23 +13,34 @@ public class NatureCompteTitreService {
     @Autowired
     private NatureCompteTitreRepository natureCompteTitreRepository;
 
+
     public NatureCompteTitre saveNatureCompteTitre(NatureCompteTitre natureCompteTitre) {
         return natureCompteTitreRepository.save(natureCompteTitre);
     }
 
-    public Optional<NatureCompteTitre> getNatureCompteTitreById(int id) {
-        return natureCompteTitreRepository.findById(id);
+
+    public NatureCompteTitre getNatureCompteTitreById(int id) {
+        return natureCompteTitreRepository.findById(id).orElse(null);
     }
+
 
     public List<NatureCompteTitre> getAllNatureCompteTitres() {
         return natureCompteTitreRepository.findAll();
     }
 
-    public void deleteNatureCompteTitreById(int id) {
+
+    public void deleteNatureCompteTitre(int id) {
         natureCompteTitreRepository.deleteById(id);
     }
 
-    public void deleteAllNatureCompteTitres() {
-        natureCompteTitreRepository.deleteAll();
+
+    public NatureCompteTitre updateNatureCompteTitre(int id, NatureCompteTitre updatedNatureCompteTitre) {
+        NatureCompteTitre existingNatureCompteTitre = natureCompteTitreRepository.findById(id).orElse(null);
+        if (existingNatureCompteTitre != null) {
+            existingNatureCompteTitre.setLibelle(updatedNatureCompteTitre.getLibelle());
+            existingNatureCompteTitre.setCodeNatureCompteTitre(updatedNatureCompteTitre.getCodeNatureCompteTitre());
+            return natureCompteTitreRepository.save(existingNatureCompteTitre);
+        }
+        return null;
     }
 }
