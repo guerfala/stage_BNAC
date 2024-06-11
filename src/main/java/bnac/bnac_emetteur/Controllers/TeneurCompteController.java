@@ -25,6 +25,7 @@ public class TeneurCompteController {
     // http://localhost:8081/bnac/AddTeneurCompte
     @PostMapping("/AddTeneurCompte")
     public void AddTeneurCompte(@RequestBody TeneurCompte teneurCompte){
+        System.out.println(teneurCompte);
         teneurCompteService.AddTeneurCompte(teneurCompte);
     }
 

@@ -18,7 +18,7 @@ public class EmetteurController {
     private EmetteurService emetteurService;
 
     // http://localhost:8081/bnac/ShowAllEmetteur
-    @GetMapping("/ShowAllRooms")
+    @GetMapping("/ShowAllEmetteur")
     public List<Emetteur> ShowAllEmetteur(){
         return emetteurService.ShowAllEmetteur();
     }
