@@ -19,7 +19,7 @@ public class OperationController {
     private OperationService operationService;
 
     // http://localhost:8081/bnac/ShowAllOperation
-    @GetMapping("/ShowAllRooms")
+    @GetMapping("/ShowAllOperation")
     public List<Operation> ShowAllOperation(){
         return operationService.ShowAllOperation();
     }

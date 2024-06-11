@@ -17,7 +17,7 @@ public class TeneurCompteController {
     private TeneurCompteService teneurCompteService;
 
     // http://localhost:8081/bnac/ShowAllTeneurCompte
-    @GetMapping("/ShowAllRooms")
+    @GetMapping("/ShowAllTeneurCompte")
     public List<TeneurCompte> ShowAllTeneurCompte(){
         return teneurCompteService.ShowAllTeneurCompte();
     }
