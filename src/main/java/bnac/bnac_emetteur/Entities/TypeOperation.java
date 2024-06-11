@@ -18,7 +18,7 @@ public class TypeOperation {
     private String IdTypeOperation;
 
     @Column(nullable = false, length = 64)
-    private String Lieblle;
+    private String Libelle;
 
     @Column(nullable = false)
     private float Sens;
