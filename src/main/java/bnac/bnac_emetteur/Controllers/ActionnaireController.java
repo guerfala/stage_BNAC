@@ -21,7 +21,7 @@ public class ActionnaireController {
     @Autowired
     private ActionnaireService actionnaireService;
 
-    @GetMapping
+    @GetMapping("/getAllActionnaires")
     public List<Actionnaire> getAllActionnaires() {
         return actionnaireService.getAllActionnaires();
     }

@@ -2,14 +2,20 @@ package bnac.bnac_emetteur.Services;
 
 import bnac.bnac_emetteur.Entities.NatureAvoir;
 import bnac.bnac_emetteur.Repositories.NatureAvoirRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class NatureAvoirService {
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(NatureAvoirService.class);
+
 
     @Autowired
     private NatureAvoirRepository natureAvoirRepository;
@@ -34,17 +40,20 @@ public class NatureAvoirService {
         natureAvoirRepository.deleteAll();
     }
 
-    public NatureAvoir updateNatureAvoir(int id, NatureAvoir updatedNatureAvoir) {
-        Optional<NatureAvoir> existingNatureAvoirOptional = natureAvoirRepository.findById(id);
-        if (existingNatureAvoirOptional.isPresent()) {
-            NatureAvoir existingNatureAvoir = existingNatureAvoirOptional.get();
-            existingNatureAvoir.setLibelle(updatedNatureAvoir.getLibelle());
-            existingNatureAvoir.setCodeCategorieAvoir(updatedNatureAvoir.getCodeCategorieAvoir());
-            // You can add more fields if needed
 
-            return natureAvoirRepository.save(existingNatureAvoir);
+    public NatureAvoir updateNatureAvoir(int id, NatureAvoir natureAvoir) {
+        logger.info("Updating NatureAvoir with id: {}", id);
+
+        Optional<NatureAvoir> existingNatureAvoir = natureAvoirRepository.findById(id);
+        if (existingNatureAvoir.isPresent()) {
+            NatureAvoir updatedNatureAvoir = existingNatureAvoir.get();
+            updatedNatureAvoir.setLibelle(natureAvoir.getLibelle());
+            updatedNatureAvoir.setCodeCategorieAvoir(natureAvoir.getCodeCategorieAvoir());
+            logger.info("Updated NatureAvoir: {}", updatedNatureAvoir);
+            return natureAvoirRepository.save(updatedNatureAvoir);
         } else {
-            return null;
+            logger.error("NatureAvoir not found with id: {}", id);
+            throw new EntityNotFoundException("NatureAvoir not found with id " + id);
         }
     }
 }

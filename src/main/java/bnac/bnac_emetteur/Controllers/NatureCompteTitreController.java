@@ -16,13 +16,13 @@ public class NatureCompteTitreController {
     @Autowired
     private NatureCompteTitreService natureCompteTitreService;
 
-    @PostMapping
+    @PostMapping("/createNatureCompteTitre")
     public ResponseEntity<NatureCompteTitre> createNatureCompteTitre(@RequestBody NatureCompteTitre natureCompteTitre) {
         NatureCompteTitre savedNatureCompteTitre = natureCompteTitreService.saveNatureCompteTitre(natureCompteTitre);
         return new ResponseEntity<>(savedNatureCompteTitre, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getNatureCompteTitreById/{id}")
     public ResponseEntity<NatureCompteTitre> getNatureCompteTitreById(@PathVariable("id") int id) {
         NatureCompteTitre natureCompteTitre = natureCompteTitreService.getNatureCompteTitreById(id);
         if (natureCompteTitre != null) {
@@ -32,13 +32,13 @@ public class NatureCompteTitreController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/getAllNatureCompteTitres")
     public ResponseEntity<List<NatureCompteTitre>> getAllNatureCompteTitres() {
         List<NatureCompteTitre> natureCompteTitres = natureCompteTitreService.getAllNatureCompteTitres();
         return new ResponseEntity<>(natureCompteTitres, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateNatureCompteTitre/{id}")
     public ResponseEntity<NatureCompteTitre> updateNatureCompteTitre(@PathVariable("id") int id, @RequestBody NatureCompteTitre updatedNatureCompteTitre) {
         NatureCompteTitre natureCompteTitre = natureCompteTitreService.updateNatureCompteTitre(id, updatedNatureCompteTitre);
         if (natureCompteTitre != null) {
@@ -48,7 +48,7 @@ public class NatureCompteTitreController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteNatureCompteTitre/{id}")
     public ResponseEntity<Void> deleteNatureCompteTitre(@PathVariable("id") int id) {
         natureCompteTitreService.deleteNatureCompteTitre(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

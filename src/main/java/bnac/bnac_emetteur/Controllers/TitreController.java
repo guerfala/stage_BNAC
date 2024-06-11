@@ -17,37 +17,37 @@ public class TitreController {
     @Autowired
     private TitreService titreService;
 
-    @PostMapping
+    @PostMapping("/createTitre")
     public ResponseEntity<Titre> createTitre(@RequestBody Titre titre) {
         Titre createdTitre = titreService.saveTitre(titre);
         return new ResponseEntity<>(createdTitre, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getTitreById/{id}")
     public ResponseEntity<Titre> getTitreById(@PathVariable String id) {
         Optional<Titre> titreOptional = titreService.getTitreById(id);
         return titreOptional.map(titre -> new ResponseEntity<>(titre, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping
+    @GetMapping("/getAllTitres")
     public List<Titre> getAllTitres() {
         return titreService.getAllTitres();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateTitre/{id}")
     public ResponseEntity<Titre> updateTitre(@PathVariable String id, @RequestBody Titre updatedTitre) {
         Titre titre = titreService.updateTitre(id, updatedTitre);
         return new ResponseEntity<>(titre, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteTitreById/{id}")
     public ResponseEntity<Void> deleteTitreById(@PathVariable String id) {
         titreService.deleteTitreById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteAllTitres")
     public ResponseEntity<Void> deleteAllTitres() {
         titreService.deleteAllTitres();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
