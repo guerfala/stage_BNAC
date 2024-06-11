@@ -1,12 +1,11 @@
 package bnac.bnac_emetteur.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name="Titre")
+@Data
 
 public class Titre {
     @Id
@@ -44,7 +43,8 @@ public class Titre {
     @Column(nullable = false)
     private String MatriculeDroitConverti;
 
-
-   @Column(name="IdEmetteur")
+    @JoinColumn(name="IdEmetteur")
+    @ManyToOne
+    private Emetteur emetteur;
 
 }

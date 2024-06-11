@@ -2,12 +2,14 @@ package bnac.bnac_emetteur.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "NatureAvoir")
+@Data
 
 public class NatureAvoir {
     @Id

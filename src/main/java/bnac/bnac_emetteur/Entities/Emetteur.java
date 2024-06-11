@@ -3,14 +3,14 @@ package bnac.bnac_emetteur.Entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Emetteur {
     @Id
     @Column( length = 16, nullable = false)

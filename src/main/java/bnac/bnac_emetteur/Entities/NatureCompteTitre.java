@@ -1,9 +1,11 @@
 package bnac.bnac_emetteur.Entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name="NatureCompteTitre")
+@Data
 public class NatureCompteTitre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
