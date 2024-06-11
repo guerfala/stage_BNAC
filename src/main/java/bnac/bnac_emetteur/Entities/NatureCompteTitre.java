@@ -1,8 +1,10 @@
 package bnac.bnac_emetteur.Entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name="NatureCompteTitre")
 public class NatureCompteTitre {
     @Id
