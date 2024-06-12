@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/bnac")
 @AllArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class EmetteurController {
 
     @Autowired

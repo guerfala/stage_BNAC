@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bnac")
+@CrossOrigin("http://localhost:4200")
 public class NatureCompteTitreController {
 
     @Autowired

@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/bnac")
+@CrossOrigin("http://localhost:4200")
 public class TitreController {
 
     @Autowired
