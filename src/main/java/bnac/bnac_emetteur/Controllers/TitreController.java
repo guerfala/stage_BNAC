@@ -1,5 +1,6 @@
 package bnac.bnac_emetteur.Controllers;
 
+import bnac.bnac_emetteur.Repositories.TitreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ public class TitreController {
 
     @Autowired
     private TitreService titreService;
+
+    @Autowired
+    private TitreRepository titreRepository;
 
     @PostMapping("/createTitre")
     public ResponseEntity<Titre> createTitre(@RequestBody Titre titre) {
@@ -52,5 +56,10 @@ public class TitreController {
     public ResponseEntity<Void> deleteAllTitres() {
         titreService.deleteAllTitres();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{idEmetteur}/titres")
+    public List<Titre> getTitresByEmetteur(@PathVariable String idEmetteur) {
+        return titreRepository.findByEmetteur_IdEmetteur(idEmetteur);
     }
 }

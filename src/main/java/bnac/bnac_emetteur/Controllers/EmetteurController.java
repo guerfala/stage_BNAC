@@ -20,9 +20,6 @@ public class EmetteurController {
     @Autowired
     private EmetteurService emetteurService;
 
-    @Autowired
-    private TitreRepository titreRepository;
-
     // http://localhost:8081/bnac/ShowAllEmetteur
     @GetMapping("/ShowAllEmetteur")
     public List<Emetteur> ShowAllEmetteur(){
@@ -45,10 +42,5 @@ public class EmetteurController {
     @DeleteMapping("/DeleteEmetteur/{emetteurId}")
     public void DeleteEmetteur(@PathVariable String emetteurId){
         this.emetteurService.DeleteEmetteur(emetteurId);
-    }
-
-    @GetMapping("/{idEmetteur}/titres")
-    public List<Titre> getTitresByEmetteur(@PathVariable String idEmetteur) {
-        return titreRepository.findByEmetteur_IdEmetteur(idEmetteur);
     }
 }

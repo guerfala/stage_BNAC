@@ -1,6 +1,8 @@
 package bnac.bnac_emetteur.Controllers;
 
 import bnac.bnac_emetteur.Entities.NatureAvoir;
+import bnac.bnac_emetteur.Entities.NatureCompteTitre;
+import bnac.bnac_emetteur.Repositories.NatureAvoirRepository;
 import bnac.bnac_emetteur.Services.NatureAvoirService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class NatureAvoirController {
 
     @Autowired
     private NatureAvoirService natureAvoirService;
+
+    @Autowired
+    private NatureAvoirRepository natureAvoirRepository;
     @PostMapping("/addNatureAvoir")
     public ResponseEntity<NatureAvoir> createNature(@RequestBody NatureAvoir natureAvoir) {
         // Log received object

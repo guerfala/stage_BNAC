@@ -1,6 +1,7 @@
 package bnac.bnac_emetteur.Controllers;
 
 import bnac.bnac_emetteur.Entities.NatureCompteTitre;
+import bnac.bnac_emetteur.Repositories.NatureCompteTitreRepository;
 import bnac.bnac_emetteur.Services.NatureCompteTitreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ public class NatureCompteTitreController {
 
     @Autowired
     private NatureCompteTitreService natureCompteTitreService;
+
+    @Autowired
+    private NatureCompteTitreRepository natureCompteTitreRepository;
 
     @PostMapping("/createNatureCompteTitre")
     public ResponseEntity<NatureCompteTitre> createNatureCompteTitre(@RequestBody NatureCompteTitre natureCompteTitre) {

@@ -69,4 +69,7 @@ public class Solde {
 
     @Column(length =16,nullable=false)
     private String CodeBO;
+
+    @Column(nullable=true)
+    private int IdUtilisateur;
 }
