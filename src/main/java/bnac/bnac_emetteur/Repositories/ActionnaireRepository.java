@@ -14,15 +14,10 @@ import java.util.List;
 @Repository
 public interface ActionnaireRepository extends JpaRepository<Actionnaire, String> {
 
-    @Query("SELECT new bnac.bnac_emetteur.DTO.ActionnaireDTO(a.Matricule, a.RaisonSociale, a.Identifiant, tc.LibelleCourt, s.Solde, nct.CodeNatureCompteTitre, nv.CodeCategorieAvoir, a.Adresse) " +
-            "FROM Actionnaire a, Emetteur e, Solde s, TeneurCompte tc, NatureCompteTitre nct, NatureAvoir nv, Titre t " +
-            "WHERE a.Matricule = s.Matricule " +
-            "AND t.emetteur.idEmetteur = e.idEmetteur " +
-            "AND s.IdNatureCompteTitre = nct.IdNatureCompteTitre " +
-            "AND s.IdNatureAvoirs = nv.IdNatureAvoirs " +
-            "AND a.emetteur.idEmetteur = :idEmetteur " +
-            "AND s.IdTitre = :idTitre " +
-            "GROUP BY a.Matricule, a.RaisonSociale, a.Identifiant, tc.LibelleCourt, s.Solde, nct.CodeNatureCompteTitre, nv.CodeCategorieAvoir, a.Adresse")
+    @Query("Select new bnac.bnac_emetteur.DTO.ActionnaireDTO(a.Matricule, a.RaisonSociale,a.IdPays, a.Identifiant,a.NaturePiece,tc.LibelleCourt,nct.CodeNatureCompteTitre, nv.CodeCategorieAvoir, s.Solde) " +
+            "from Actionnaire a, Emetteur e,Solde s,TeneurCompte tc, NatureCompteTitre nct, NatureAvoir nv, Titre t " +
+            "Where  a.Matricule=s.Matricule and t.emetteur.idEmetteur=e.idEmetteur and s.IdTC=tc.IdTC and s.IdNatureCompteTitre=nct.IdNatureCompteTitre and s.IdNatureAvoirs=nv.IdNatureAvoirs and s.teneurCompte.IdTC=tc.IdTC and s.IdNatureCompteTitre=nct.IdNatureCompteTitre and s.IdNatureAvoirs=nv.IdNatureAvoirs and a.emetteur.idEmetteur= :idEmetteur and s.IdTitre= :idTitre " +
+            "group by a.Matricule, a.RaisonSociale, a.Identifiant,tc.LibelleCourt,s.Solde,nct.CodeNatureCompteTitre, nv.CodeCategorieAvoir,a.NaturePiece, a.IdPays")
     List<ActionnaireDTO> findActionnaires(@Param("idEmetteur") String idEmetteur, @Param("idTitre") String idTitre);
 
     @Query("Select new bnac.bnac_emetteur.DTO.ActionnaireDTO(a.Matricule, a.RaisonSociale,a.IdPays, a.Identifiant,a.NaturePiece,tc.LibelleCourt,nct.CodeNatureCompteTitre, nv.CodeCategorieAvoir, s.Solde) " +
