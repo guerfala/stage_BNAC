@@ -1,11 +1,14 @@
 package bnac.bnac_emetteur.Services;
 
+import bnac.bnac_emetteur.DTO.SoldeDTO;
 import bnac.bnac_emetteur.Entities.Solde;
 import bnac.bnac_emetteur.Entities.SoldePk;
 import bnac.bnac_emetteur.Repositories.SoldeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,5 +45,25 @@ public class SoldeService {
         s.setCodeBO(solde.getCodeBO());
 
         this.soldeRepo.save(s);
+    }
+
+    public List<SoldeDTO> getCapitale(String idTitre, LocalDateTime selectedDate, int pourcentage) {
+        List<Object[]> results = soldeRepo.findCapitaleNative(idTitre, selectedDate);
+        List<SoldeDTO> soldeDTOs = new ArrayList<>();
+
+        for (Object[] result : results) {
+            if ((double) result[2] >= pourcentage)
+            {
+                SoldeDTO dto = new SoldeDTO();
+                dto.setMatricule((Integer) result[0]);
+                dto.setRaisonSociale((String) result[1]);
+                dto.setPrtage((double) result[2]);
+                dto.setSolde((long) result[3]);
+                soldeDTOs.add(dto);
+            }
+
+        }
+
+        return soldeDTOs;
     }
 }

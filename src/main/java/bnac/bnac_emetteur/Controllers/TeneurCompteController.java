@@ -1,11 +1,14 @@
 package bnac.bnac_emetteur.Controllers;
 
+import bnac.bnac_emetteur.DTO.TeneurCompteDTO;
 import bnac.bnac_emetteur.Entities.TeneurCompte;
+import bnac.bnac_emetteur.Repositories.TeneurCompteRepo;
 import bnac.bnac_emetteur.Services.TeneurCompteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -16,6 +19,9 @@ public class TeneurCompteController {
 
     @Autowired
     private TeneurCompteService teneurCompteService;
+
+    @Autowired
+    private TeneurCompteRepo teneurCompteRepo;
 
     // http://localhost:8081/bnac/ShowAllTeneurCompte
     @GetMapping("/ShowAllTeneurCompte")
@@ -40,5 +46,11 @@ public class TeneurCompteController {
     @DeleteMapping("/DeleteTeneurCompte/{IdTC}")
     public void DeleteTeneurCompte(@PathVariable String IdTC){
         this.teneurCompteService.DeleteTeneurCompte(IdTC);
+    }
+
+    // http://localhost:8081/bnac/ShowAllTeneurCompteWithSolde/{idTitre}
+    @GetMapping("/ShowAllTeneurCompteWithSolde/{idTitre}/{selectedDate}")
+    public List<TeneurCompteDTO> ShowAllTeneurCompteWithSolde(@PathVariable String idTitre, @PathVariable LocalDateTime selectedDate){
+        return teneurCompteRepo.findTeneurCompteAndSoldeByEmetteurAndTitre(idTitre, selectedDate);
     }
 }
