@@ -23,9 +23,15 @@ public class OperationController {
     @Autowired
     private OperationRepo operationRepo;
 
-    // http://localhost:8081/bnac/ShowAllOperation
+    // http://localhost:8081/bnac/ShowAllOperation/{idTitre}/{minDate}/{maxDate}
     @GetMapping("/ShowAllOperation/{idTitre}/{minDate}/{maxDate}")
     public List<MouvementsDTO> ShowAllOperation(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate){
         return operationRepo.findAllOperation(idTitre, minDate, maxDate);
+    }
+
+    // http://localhost:8081/bnac/ShowAllOperationByTc/{idTitre}/{minDate}/{maxDate}/{idTC}
+    @GetMapping("/ShowAllOperationByTc/{idTitre}/{minDate}/{maxDate}/{idTC}")
+    public List<MouvementsDTO> ShowAllOperationByTc(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable String idTC){
+        return operationRepo.findAllOperationByTc(idTitre, minDate, maxDate, idTC);
     }
 }
