@@ -47,5 +47,16 @@ public interface ActionnaireRepository extends JpaRepository<Actionnaire, String
             "AND s.dateMaj <= :selectedDate " +
             "group by a.Matricule, a.RaisonSociale, a.Identifiant,tc.LibelleCourt,s.Solde,nct.CodeNatureCompteTitre, nv.CodeCategorieAvoir,a.NaturePiece, a.IdPays")
     List<ActionnaireDTO> findEtatActionnairesByEmetteurAndTitreAndTCAndNatureCompteAndNatureAvoir(@Param("idEmetteur") String idEmetteur, @Param("idTitre") String idTitre, @Param("idTC") String idTC, @Param("idNatureCompte") String idNatureCompte, @Param("idNatureAvoir") String idNatureAvoir, @Param("selectedDate") LocalDateTime selectedDate);
+    
+    @Query("Select new bnac.bnac_emetteur.DTO.ActionnaireDTO(a.Matricule, a.RaisonSociale, sum(s.Solde)) " +
+            "from Actionnaire a,Solde s, Titre t " +
+            "Where a.Matricule=s.Matricule " +
+            "and t.IdTitre=s.titre.IdTitre " +
+            "and t.emetteur.idEmetteur=a.emetteur.idEmetteur " +
+            "and s.IdTitre= :idTitre " +
+            "and s.dateMaj <= :DateMaj " +
+            "and s.actionnaire.Matricule= :Matricule " +
+            "group by a.Matricule, a.RaisonSociale,t.Nombre")
+    ActionnaireDTO findActionnaireMouvement(@Param("idTitre") String idTitre, @Param("DateMaj") LocalDateTime DateMaj, @Param("Matricule") int Matricule);
 
 }

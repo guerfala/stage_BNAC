@@ -18,6 +18,7 @@ public class ActionnaireDTO {
     private String Adresse;
     private String IdPays;
     private String NaturePiece;
+    private Long SommeSolde;
 
     // Constructor for the first query
     public ActionnaireDTO(int Matricule, String RaisonSociale, String Identifiant, String LibelleCourt, int Solde, String CodeNatureCompteTitre, String CodeCategorieAvoir, String Adresse) {
@@ -42,5 +43,11 @@ public class ActionnaireDTO {
         this.CodeNatureCompteTitre = CodeNatureCompteTitre;
         this.CodeCategorieAvoir = CodeCategorieAvoir;
         this.Solde = Solde;
+    }
+
+    public ActionnaireDTO(int Matricule, String RaisonSociale, Long SommeSolde) {
+        this.Matricule = Matricule;
+        this.RaisonSociale = RaisonSociale;
+        this.SommeSolde = SommeSolde;
     }
 }
