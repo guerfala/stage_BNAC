@@ -1,6 +1,7 @@
 package bnac.bnac_emetteur.Controllers;
 
 import bnac.bnac_emetteur.DTO.ActionnaireDTO;
+import bnac.bnac_emetteur.DTO.JournalDTO;
 import bnac.bnac_emetteur.DTO.MouvementsDTO;
 import bnac.bnac_emetteur.Entities.Operation;
 import bnac.bnac_emetteur.Repositories.ActionnaireRepository;
@@ -62,5 +63,29 @@ public class OperationController {
             mouvement.setSolde(actionnaireDTO.getSolde());
         });
         return mouvements;
+    }
+
+    // http://localhost:8081/bnac/ShowAllMouvements/{idTitre}/{minDate}/{maxDate}
+    @GetMapping("/ShowAllJournals/{idTitre}/{minDate}/{maxDate}")
+    public List<JournalDTO> ShowAllJournals(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate){
+        return operationRepo.findAllJournals(idTitre, minDate, maxDate);
+    }
+
+    // http://localhost:8081/bnac/ShowAllJournalsByTc/{idTitre}/{minDate}/{maxDate}
+    @GetMapping("/ShowAllJournalsByTc/{idTitre}/{minDate}/{maxDate}/{idTc}")
+    public List<JournalDTO> ShowAllJournalsByTc(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable String idTc){
+        return operationRepo.findAllJournalsByTc(idTitre, minDate, maxDate, idTc);
+    }
+
+    // http://localhost:8081/bnac/ShowAllJournalsByTypeOperation/{idTitre}/{minDate}/{maxDate}
+    @GetMapping("/ShowAllJournalsByTypeOperation/{idTitre}/{minDate}/{maxDate}/{typeOp}")
+    public List<JournalDTO> ShowAllJournalsByTypeOperation(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable String typeOp){
+        return operationRepo.findAllJournalsByTypeOperation(idTitre, minDate, maxDate, typeOp);
+    }
+
+    // http://localhost:8081/bnac/ShowAllJournalsByTypeOperation/{idTitre}/{minDate}/{maxDate}
+    @GetMapping("/ShowAllJournalsByTypeOperationAndTc/{idTitre}/{minDate}/{maxDate}/{typeOp}/{idTc}")
+    public List<JournalDTO> ShowAllJournalsByTypeOperationAndTc(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable String typeOp, @PathVariable String idTc){
+        return operationRepo.findAllJournalsByTypeOperationAndTc(idTitre, minDate, maxDate, typeOp, idTc);
     }
 }
