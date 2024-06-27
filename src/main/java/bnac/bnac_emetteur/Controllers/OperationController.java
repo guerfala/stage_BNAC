@@ -3,6 +3,7 @@ package bnac.bnac_emetteur.Controllers;
 import bnac.bnac_emetteur.DTO.ActionnaireDTO;
 import bnac.bnac_emetteur.DTO.JournalDTO;
 import bnac.bnac_emetteur.DTO.MouvementsDTO;
+import bnac.bnac_emetteur.DTO.SoldeDTO;
 import bnac.bnac_emetteur.Entities.Operation;
 import bnac.bnac_emetteur.Repositories.ActionnaireRepository;
 import bnac.bnac_emetteur.Repositories.OperationRepo;
@@ -44,25 +45,19 @@ public class OperationController {
     // http://localhost:8081/bnac/ShowAllOperationByMatricule/{idTitre}/{minDate}/{maxDate}/{idTC}
     @GetMapping("/ShowAllMouvementsByMatricule/{idTitre}/{minDate}/{maxDate}/{matricule}")
     public List<MouvementsDTO> ShowAllMouvementsByMatricule(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable int matricule){
-        ActionnaireDTO actionnaireDTO = actionnaireRepository.findActionnaireMouvement(idTitre, maxDate, matricule);
-        List<MouvementsDTO> mouvements = operationRepo.findAllMouvementsByMatricule(idTitre, minDate, maxDate, matricule);
-        mouvements.forEach(mouvement -> {
-            mouvement.setActionnaire(actionnaireDTO.getRaisonSociale());
-            mouvement.setSolde(actionnaireDTO.getSolde());
-        });
-        return mouvements;
+        return operationRepo.findAllMouvementsByMatricule(idTitre, minDate, maxDate, matricule);
     }
 
     // http://localhost:8081/bnac/ShowAllOperationByMatricule/{idTitre}/{minDate}/{maxDate}/{idTC}
     @GetMapping("/ShowAllMouvementsByMatriculeAndTc/{idTitre}/{minDate}/{maxDate}/{matricule}/{idTC}")
     public List<MouvementsDTO> ShowAllMouvementsByMatriculeAndTc(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable int matricule, @PathVariable String idTC){
-        ActionnaireDTO actionnaireDTO = actionnaireRepository.findActionnaireMouvement(idTitre, maxDate, matricule);
-        List<MouvementsDTO> mouvements = operationRepo.findAllMouvementsByMatriculeAndTc(idTitre, minDate, maxDate, matricule, idTC);
-        mouvements.forEach(mouvement -> {
-            mouvement.setActionnaire(actionnaireDTO.getRaisonSociale());
-            mouvement.setSolde(actionnaireDTO.getSolde());
-        });
-        return mouvements;
+        return operationRepo.findAllMouvementsByMatriculeAndTc(idTitre, minDate, maxDate, matricule, idTC);
+    }
+
+    // http://localhost:8081/bnac/ShowAllOperationByMatricule/{idTitre}/{minDate}/{maxDate}/{idTC}
+    @GetMapping("/GetActionnaireMouvement/{idTitre}/{maxDate}/{matricule}")
+    public SoldeDTO GetActionnaireMouvement(@PathVariable String idTitre, @PathVariable LocalDateTime maxDate, @PathVariable int matricule){
+        return operationRepo.findActionnaireMouvement(idTitre, maxDate, matricule);
     }
 
     // http://localhost:8081/bnac/ShowAllMouvements/{idTitre}/{minDate}/{maxDate}
@@ -87,5 +82,29 @@ public class OperationController {
     @GetMapping("/ShowAllJournalsByTypeOperationAndTc/{idTitre}/{minDate}/{maxDate}/{typeOp}/{idTc}")
     public List<JournalDTO> ShowAllJournalsByTypeOperationAndTc(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable String typeOp, @PathVariable String idTc){
         return operationRepo.findAllJournalsByTypeOperationAndTc(idTitre, minDate, maxDate, typeOp, idTc);
+    }
+
+    // http://localhost:8081/bnac/ShowAllJournalsByTypeOperation/{idTitre}/{minDate}/{maxDate}
+    @GetMapping("/ShowAllJournalsByMatricule/{idTitre}/{minDate}/{maxDate}/{matricule}")
+    public List<JournalDTO> ShowAllJournalsByMatricule(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable int matricule){
+        return operationRepo.findAllJournalsByMatricule(idTitre, minDate, maxDate, matricule);
+    }
+
+    // http://localhost:8081/bnac/ShowAllJournalsByTypeOperation/{idTitre}/{minDate}/{maxDate}
+    @GetMapping("/ShowAllJournalsByMatriculeAndTc/{idTitre}/{minDate}/{maxDate}/{matricule}/{idTc}")
+    public List<JournalDTO> ShowAllJournalsByMatriculeAndTc(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable int matricule, @PathVariable String idTc){
+        return operationRepo.findAllJournalsByMatriculeAndTc(idTitre, minDate, maxDate, matricule, idTc);
+    }
+
+    // http://localhost:8081/bnac/ShowAllJournalsByTypeOperation/{idTitre}/{minDate}/{maxDate}
+    @GetMapping("/ShowAllJournalsByMatriculeAndTypeOp/{idTitre}/{minDate}/{maxDate}/{matricule}/{typeOp}")
+    public List<JournalDTO> ShowAllJournalsByMatriculeAndTypeOp(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable int matricule, @PathVariable String typeOp){
+        return operationRepo.findAllJournalsByMatriculeAndTypeOp(idTitre, minDate, maxDate, matricule, typeOp);
+    }
+
+    // http://localhost:8081/bnac/ShowAllJournalsByTypeOperation/{idTitre}/{minDate}/{maxDate}
+    @GetMapping("/ShowAllJournalsByMatriculeAndByTcAndByTypeOp/{idTitre}/{minDate}/{maxDate}/{matricule}/{idTc}/{typeOp}")
+    public List<JournalDTO> ShowAllJournalsByMatriculeAndByTcAndByTypeOp(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable int matricule, @PathVariable String idTc, @PathVariable String typeOp){
+        return operationRepo.findAllJournalsByMatriculeAndTcAndTypeOp(idTitre, minDate, maxDate, matricule, idTc, typeOp);
     }
 }

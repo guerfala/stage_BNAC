@@ -22,8 +22,7 @@ public interface SoldeRepo extends JpaRepository<Solde, SoldePk> {
             "WHERE s.IdTitre = :idTitre " +
             "AND s.dateMaj <= :selectedDate " +
             "GROUP BY a.Matricule, a.RaisonSociale, t.Nombre " +
-            "HAVING ROUND(CAST(SUM(s.Solde) AS FLOAT) * 100 / t.Nombre, 3) >= 0 " +
-            "ORDER BY prtage DESC")
+            "HAVING ROUND(CAST(SUM(s.Solde) AS FLOAT) * 100 / t.Nombre, 3) >= 0 ")
     List<Object[]> findCapitaleNative(@Param("idTitre") String idTitre, @Param("selectedDate") LocalDateTime selectedDate);
 
 }

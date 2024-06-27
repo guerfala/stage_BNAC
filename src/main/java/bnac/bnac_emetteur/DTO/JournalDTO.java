@@ -18,4 +18,26 @@ public class JournalDTO {
     private String numContrat;
     private int debit;
     private int credit;
+    private int idOp;
+
+    public JournalDTO(String tc, Date dateBourse, String type, String raisonSociale, String idTitre, String numContrat, int debit, int credit) {
+        this.tc = tc;
+        this.dateBourse = dateBourse;
+        this.type = type;
+        this.raisonSociale = raisonSociale;
+        this.idTitre = idTitre;
+        this.numContrat = numContrat;
+        this.debit = debit;
+        this.credit = credit;
+    }
+
+    public JournalDTO(String tc, Date dateBourse, String type, int idOp, String numContrat, int debit, int credit) {
+        this.tc = tc;
+        this.dateBourse = dateBourse;
+        this.type = type;
+        this.idOp = idOp;
+        this.numContrat = numContrat;
+        this.debit = debit;
+        this.credit = credit;
+    }
 }
