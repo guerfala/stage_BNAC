@@ -26,6 +26,7 @@ public class Actionnaire_N {
 
     @Column(nullable = true, length = 32)
     private String NaturePiece;
+
     @Column(nullable = true, length = 16)
     private String Identifiant;
 
@@ -40,13 +41,17 @@ public class Actionnaire_N {
 
     @Column(nullable = true, length = 2)
     private String IdStatus;
+
     @Column(nullable = true)
     private boolean Resident;
+
     @Column(nullable = true, length = 2)
     private String IdPays;
+
     @JoinColumn(name = "IdNatureAvoirs", nullable = true)
     @ManyToOne
     private NatureAvoir natureAvoir;
+
     @Column(nullable = true)
     private LocalDateTime DateOuverture;
 

@@ -12,7 +12,6 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Import")
 public class Import {
 
     @Id
@@ -28,7 +27,7 @@ public class Import {
     @Column(nullable = true, length = 5)
     private String CodeOperation;   //type_operation_N
 
-    @Column(length =16,nullable = false)
+    @Column(length =16,nullable = true)
     private String CodeSISIN;   //titre
 
     @Column(nullable = true)
@@ -43,33 +42,33 @@ public class Import {
     @Column(nullable = true, length = 16)
     private String NumContrat; //Operation_N
 
-    @Column(length =3,nullable = false)
+    @Column(length =3,nullable = true)
     private String CAVE; //codeCategorieAvoir men natureAvoir
 
-    @Column(length =3,nullable = false)
+    @Column(length =3,nullable = true)
     private String CAVR; //codeCategorieAvoir men natureAvoir
 
 
-    @Column(length =25,nullable = false)
+    @Column(length =25,nullable = true)
     private String Nature_CompteE; //Sous_CompteE
 
 
-    @Column(length =25,nullable = false)
+    @Column(length =25,nullable = true)
     private String Nature_CompteR; //Sous_CompteR
 
-    @Column(length =255,nullable = false)
+    @Column(length =255,nullable = true)
     private String Client;
 
-    @Column(nullable=false)
+    @Column(nullable=true)
     private int Quantite;
 
-    @Column(length =255,nullable = false)
+    @Column(length =255,nullable = true)
     private String TypeClient;
 
-    @Column(length =255,nullable = false)
+    @Column(length =255,nullable = true)
     private String Nature_id;
 
-    @Column(nullable = true, length = 16)
+    @Column(nullable = true)
     private String Identifiant;
 
     @Column(nullable = true, length = 25)
@@ -84,7 +83,7 @@ public class Import {
     @Column(nullable = true, length = 4)
     private String Type_import;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean Treated;
 
     @JoinColumn(name = "IdEmetteur", nullable = false)
@@ -103,7 +102,7 @@ public class Import {
     @Column(nullable = true)
     private Double Solde;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String cav;
 
     @Column(nullable = true)
