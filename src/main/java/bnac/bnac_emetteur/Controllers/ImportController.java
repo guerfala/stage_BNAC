@@ -27,8 +27,14 @@ public class ImportController {
     }*/
 
     @PostMapping("/importfcra/{idEmetteur}")
-    public ResponseEntity<Void> saveImport(@RequestBody ImportDTO importDto, @PathVariable String idEmetteur) {
-        importService.saveImport(importDto, idEmetteur);
+    public ResponseEntity<Void> saveImportFCRA(@RequestBody ImportDTO importDto, @PathVariable String idEmetteur) {
+        importService.saveImportFCRA(importDto, idEmetteur);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/importfgo/{idEmetteur}")
+    public ResponseEntity<Void> saveImportFGO(@RequestBody ImportDTO importDto, @PathVariable String idEmetteur) {
+        importService.saveImportFGO(importDto, idEmetteur);
         return ResponseEntity.ok().build();
     }
 }

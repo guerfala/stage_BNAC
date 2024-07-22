@@ -1,11 +1,14 @@
 package bnac.bnac_emetteur.Entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -22,7 +25,7 @@ public class Import {
     private String Libelle;      //type_operation_N
 
     @Column(nullable = true)
-    private float SensComptable;     //type_operation_N
+    private String SensComptable;     //type_operation_N
 
     @Column(nullable = true, length = 5)
     private String CodeOperation;   //type_operation_N
@@ -31,13 +34,21 @@ public class Import {
     private String CodeSISIN;   //titre
 
     @Column(nullable = true)
-    private Date DateOperation; //Operation_N
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate DateOperation;
 
     @Column(nullable = true)
-    private Date DateImport;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate DateImport;
 
     @Column(nullable = true)
-    private Date DateBourse;  //Operation_N
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate DateBourse;
+
+    @Column(nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate DateDeNaissance;
+
 
     @Column(nullable = true, length = 16)
     private String NumContrat; //Operation_N
@@ -91,9 +102,6 @@ public class Import {
     private Emetteur emetteur;
 
     @Column(nullable = true)
-    private Date DateDeNaissance;
-
-    @Column(nullable = true)
     private String TypeDeResidence;
 
     @Column(nullable = true)
@@ -117,8 +125,9 @@ public class Import {
     @Column(nullable = true)
     private String NatureClient;
 
-    @Column(nullable = true)
-    private String Titre;
+    @JoinColumn(name = "IdTitre", nullable = false)
+    @ManyToOne
+    private Titre Titre;
 
 
 

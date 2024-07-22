@@ -3,12 +3,16 @@ package bnac.bnac_emetteur.Services;
 import bnac.bnac_emetteur.DTO.ImportDTO;
 import bnac.bnac_emetteur.Entities.Emetteur;
 import bnac.bnac_emetteur.Entities.Import;
+import bnac.bnac_emetteur.Entities.Titre;
 import bnac.bnac_emetteur.Repositories.EmetteurRepo;
 import bnac.bnac_emetteur.Repositories.ImportRepository;
+import bnac.bnac_emetteur.Repositories.TitreRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -22,28 +26,17 @@ public class ImportService {
     @Autowired
     private EmetteurRepo emetteurRepo;
 
-    public void saveAll(Import[] importData, String idEmetteur) {
-        try {
-            Emetteur emetteur = emetteurRepo.findById(idEmetteur)
-                    .orElseThrow(() -> new RuntimeException("Emetteur not found"));
-            for (Import imp : importData) {
-                imp.setEmetteur(emetteur);
-                importRepository.save(imp);
-            }
-        } catch (Exception e) {
-            logger.error("Error saving import data", e);
-            throw e; // Rethrow to ensure the controller can return a 500 response
-        }
-    }
+    @Autowired
+    private TitreRepository titreRepository;
 
-    public void saveImport(ImportDTO importDto, String idEmetteur) {
+    public void saveImportFCRA(ImportDTO importDto, String idEmetteur) {
         Emetteur emetteur = emetteurRepo.findById(idEmetteur).get();
         // Map ImportDto to Import entity and save to repository
-        Import importEntity = mapToEntity(importDto, emetteur);
+        Import importEntity = mapToEntityFCRA(importDto, emetteur);
         importRepository.save(importEntity);
     }
 
-    private Import mapToEntity(ImportDTO importDto, Emetteur emetteur) {
+    private Import mapToEntityFCRA(ImportDTO importDto, Emetteur emetteur) {
         Import importEntity = new Import();
 
         // Map fields from importDto to importEntity
@@ -51,37 +44,87 @@ public class ImportService {
         importEntity.setCAVE(importDto.getCave());
         importEntity.setCAVR(importDto.getCavr());
         importEntity.setClient(importDto.getClient());
-        importEntity.setCodeOperation(importDto.getCodeOperation());
-        importEntity.setCodeSISIN(importDto.getCodeSisin());
-        importEntity.setDateBourse(importDto.getDateBourse());
-        importEntity.setDateDeNaissance(importDto.getDateDeNaissance());
-        importEntity.setDateImport(importDto.getDateImport());
-        importEntity.setDateOperation(importDto.getDateOperation());
+        importEntity.setCodeOperation(importDto.getCode_operation());
+        importEntity.setCodeSISIN(importDto.getCodesisin());
+        importEntity.setDateBourse(importDto.getDate_bourse());
+        importEntity.setDateDeNaissance(importDto.getDate_de_naissance());
+        importEntity.setDateImport(importDto.getDate_import());
+        importEntity.setDateOperation(null);
         importEntity.setIdentifiant(importDto.getIdentifiant());
         importEntity.setLibelle(importDto.getLibelle());
         importEntity.setNationalite(importDto.getNationalite());
-        importEntity.setNatureClient(importDto.getNatureClient());
-        importEntity.setNatureCompte(importDto.getNatureCompte());
-        importEntity.setNature_CompteE(importDto.getNatureComptee());
-        importEntity.setNature_CompteR(importDto.getNatureCompter());
-        importEntity.setNature_id(importDto.getNatureId());
-        importEntity.setNumContrat(importDto.getNumContrat());
+        importEntity.setNatureClient(importDto.getNature_client());
+        importEntity.setNatureCompte(importDto.getNature_compte());
+        importEntity.setNature_CompteE(importDto.getNature_comptee());
+        importEntity.setNature_CompteR(importDto.getNature_compter());
+        importEntity.setNature_id(importDto.getNature_id());
+        importEntity.setNumContrat(importDto.getNum_contrat());
         importEntity.setQuantite(importDto.getQuantite());
-        importEntity.setSensComptable(importDto.getSensComptable());
+        importEntity.setSensComptable(importDto.getSens_comptable());
         importEntity.setSolde(importDto.getSolde());
         importEntity.setStatut(importDto.getStatut());
         importEntity.setTC(importDto.getTc());
         importEntity.setTCE(importDto.getTce());
         importEntity.setTCR(importDto.getTcr());
-        importEntity.setTitre(importDto.getTitre());
         importEntity.setTreated(importDto.getTreated());
-        importEntity.setTypeClient(importDto.getTypeClient());
-        importEntity.setTypeDeResidence(importDto.getTypeDeResidence());
-        importEntity.setType_import(importDto.getTypeImport());
+        importEntity.setTypeClient(importDto.getType_client());
+        importEntity.setTypeDeResidence(importDto.getType_de_residence());
+        importEntity.setType_import(importDto.getType_import());
         importEntity.setCav(importDto.getCav());
         importEntity.setEmetteur(emetteur);
 
+        Titre titre = titreRepository.findById(importDto.getTitre()).get();
+        importEntity.setTitre(titre);
 
+        return importEntity;
+    }
+
+    public void saveImportFGO(ImportDTO importDto, String idEmetteur) {
+        Emetteur emetteur = emetteurRepo.findById(idEmetteur).get();
+        // Map ImportDto to Import entity and save to repository
+        Import importEntity = mapToEntityFGO(importDto, emetteur);
+        importRepository.save(importEntity);
+    }
+
+    private Import mapToEntityFGO(ImportDTO importDto, Emetteur emetteur) {
+        Import importEntity = new Import();
+
+        // Map fields from importDto to importEntity
+        importEntity.setAdresse(importDto.getAdresse());
+        importEntity.setCAVE(importDto.getCave());
+        importEntity.setCAVR(importDto.getCavr());
+        importEntity.setClient(importDto.getClient());
+        importEntity.setCodeOperation(importDto.getCode_operation());
+        importEntity.setCodeSISIN(importDto.getCodesisin());
+        importEntity.setDateBourse(importDto.getDate_bourse());
+        importEntity.setDateDeNaissance(null);
+        importEntity.setDateImport(importDto.getDate_import());
+        importEntity.setDateOperation(importDto.getDate_operation());
+        importEntity.setIdentifiant(importDto.getIdentifiant());
+        importEntity.setLibelle(importDto.getLibelle());
+        importEntity.setNationalite(importDto.getNationalite());
+        importEntity.setNatureClient(importDto.getNature_client());
+        importEntity.setNatureCompte(importDto.getNature_compte());
+        importEntity.setNature_CompteE(importDto.getNature_comptee());
+        importEntity.setNature_CompteR(importDto.getNature_compter());
+        importEntity.setNature_id(importDto.getNature_id());
+        importEntity.setNumContrat(importDto.getNum_contrat());
+        importEntity.setQuantite(importDto.getQuantite());
+        importEntity.setSensComptable(importDto.getSens_comptable());
+        importEntity.setSolde(importDto.getSolde());
+        importEntity.setStatut(importDto.getStatut());
+        importEntity.setTC(importDto.getTc());
+        importEntity.setTCE(importDto.getTce());
+        importEntity.setTCR(importDto.getTcr());
+        importEntity.setTreated(importDto.getTreated());
+        importEntity.setTypeClient(importDto.getType_client());
+        importEntity.setTypeDeResidence(importDto.getType_de_residence());
+        importEntity.setType_import(importDto.getType_import());
+        importEntity.setCav(importDto.getCav());
+        importEntity.setEmetteur(emetteur);
+
+        Titre titre = titreRepository.findById(importDto.getTitre()).get();
+        importEntity.setTitre(titre);
 
         return importEntity;
     }
