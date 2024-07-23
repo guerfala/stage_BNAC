@@ -54,4 +54,9 @@ public class TitreService {
             throw new IllegalArgumentException("Titre with id " + id + " not found");
         }
     }
+
+    public String getIsin(String id){
+        Titre titre = titreRepository.findById(id).get();
+        return titre.getCodeSISIN();
+    }
 }

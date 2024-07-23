@@ -62,4 +62,9 @@ public class TitreController {
     public List<Titre> getTitresByEmetteur(@PathVariable String idEmetteur) {
         return titreRepository.findByEmetteur_IdEmetteur(idEmetteur);
     }
+
+    @GetMapping("/getIsinByIdTitre/{id}")
+    public String getIsinByIdTitre(@PathVariable String id) {
+        return titreService.getIsin(id);
+    }
 }

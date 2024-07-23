@@ -66,10 +66,10 @@ public class ImportService {
         importEntity.setTC(importDto.getTc());
         importEntity.setTCE(importDto.getTce());
         importEntity.setTCR(importDto.getTcr());
-        importEntity.setTreated(importDto.getTreated());
+        importEntity.setTreated(false);
         importEntity.setTypeClient(importDto.getType_client());
         importEntity.setTypeDeResidence(importDto.getType_de_residence());
-        importEntity.setType_import(importDto.getType_import());
+        importEntity.setType_import("FCRA");
         importEntity.setCav(importDto.getCav());
         importEntity.setEmetteur(emetteur);
 
@@ -116,10 +116,10 @@ public class ImportService {
         importEntity.setTC(importDto.getTc());
         importEntity.setTCE(importDto.getTce());
         importEntity.setTCR(importDto.getTcr());
-        importEntity.setTreated(importDto.getTreated());
+        importEntity.setTreated(false);
         importEntity.setTypeClient(importDto.getType_client());
         importEntity.setTypeDeResidence(importDto.getType_de_residence());
-        importEntity.setType_import(importDto.getType_import());
+        importEntity.setType_import("FGO");
         importEntity.setCav(importDto.getCav());
         importEntity.setEmetteur(emetteur);
 
