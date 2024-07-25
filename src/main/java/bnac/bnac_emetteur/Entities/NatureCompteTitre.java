@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name="NatureCompteTitre")
 @Data
+@Table(name="NatureCompteTitre")
 public class NatureCompteTitre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

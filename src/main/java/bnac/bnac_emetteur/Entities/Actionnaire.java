@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 public class Actionnaire {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Matricule;
 
     @JoinColumn(name = "IdEmetteur", nullable = false)

@@ -16,4 +16,10 @@ public class ActionnaireService {
     public List<Actionnaire> getAllActionnaires() {
         return actionnaireRepository.findAll();
     }
+
+    /*public List<Actionnaire> getFiltredActionnaires(String idEmetteur, String idTitre)
+    {
+        return actionnaireRepository.findActionnaires(idEmetteur, idTitre);
+    }*/
+
 }

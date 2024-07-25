@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/bnac")
+@CrossOrigin("http://localhost:4200")
 public class TitreController {
 
     @Autowired
@@ -52,4 +53,17 @@ public class TitreController {
         titreService.deleteAllTitres();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/titres/{emetteurId}")
+    public ResponseEntity<List<String>> getTitresByEmetteurId(@PathVariable String emetteurId) {
+        List<String> titres = titreService.getTitresByEmetteurId(emetteurId);
+        return ResponseEntity.ok(titres);
+    }
+
+        @GetMapping("/libelleCourtTitre")
+    public ResponseEntity<List<String>> getAllTitreLibelleCourt() {
+        List<String> libelleCourts = titreService.getAllTitreLibelleCourt();
+        return ResponseEntity.ok(libelleCourts);
+    }
+
 }

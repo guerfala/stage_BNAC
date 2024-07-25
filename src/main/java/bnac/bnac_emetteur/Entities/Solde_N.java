@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="Solde")
+@Table(name="Solde_N")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @IdClass(SoldePk.class)
-public class Solde {
+public class Solde_N {
 
     @Id
     @Column(name = "Matricule", nullable = false)
@@ -58,18 +58,8 @@ public class Solde {
     @Column(nullable=false)
     private int Solde;
 
-    @Column(nullable=false)
-    private float SoldeNantissement;
-
     @Column(nullable = false)
     private LocalDateTime dateMaj;
 
-    @Column(nullable=false)
-    private float SoldeOpposition;
 
-    @Column(length =16,nullable=false)
-    private String CodeBO;
-
-    @Column(nullable=true)
-    private int IdUtilisateur;
 }

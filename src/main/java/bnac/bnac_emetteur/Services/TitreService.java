@@ -7,6 +7,7 @@ import bnac.bnac_emetteur.Repositories.TitreRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TitreService {
@@ -54,4 +55,14 @@ public class TitreService {
             throw new IllegalArgumentException("Titre with id " + id + " not found");
         }
     }
+    public List<String> getAllTitreLibelleCourt() {
+        return titreRepository.findAll().stream()
+                .map(Titre::getLibelleCourt)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getTitresByEmetteurId(String emetteurId) {
+        return titreRepository.findLibelleCourtByEmetteurId(emetteurId);
+    }
+
 }

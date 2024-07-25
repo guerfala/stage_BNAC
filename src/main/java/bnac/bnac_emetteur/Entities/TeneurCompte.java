@@ -54,9 +54,13 @@ public class TeneurCompte {
     @Column(nullable = true, length = 8)
     private String CivilitePremierResponsable;
 
-    @Column(nullable = true, length = 16)
-    private String IdEmetteur;
+
+    @Column(name = "idEmetteur", nullable = false)
+    private  String Id_Emetteur;
+
+
 
     @Column(nullable = true, length = 3)
     private String CodeIAA;
+
 }
