@@ -21,11 +21,6 @@ public class ImportController {
     @Autowired
     private ImportService importService;
 
-    /*@PostMapping("/importfcra/{idEmetteur}")
-    public void importfcra(@RequestBody Import[] importData, @PathVariable String idEmetteur) {
-        importService.saveAll(importData, idEmetteur);
-    }*/
-
     @PostMapping("/importfcra/{idEmetteur}")
     public ResponseEntity<Void> saveImportFCRA(@RequestBody ImportDTO importDto, @PathVariable String idEmetteur) {
         importService.saveImportFCRA(importDto, idEmetteur);
@@ -35,6 +30,22 @@ public class ImportController {
     @PostMapping("/importfgo/{idEmetteur}")
     public ResponseEntity<Void> saveImportFGO(@RequestBody ImportDTO importDto, @PathVariable String idEmetteur) {
         importService.saveImportFGO(importDto, idEmetteur);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/getFCRA/{idEmetteur}/{idTitre}")
+    public List<Import> GetFCRA(@PathVariable String idEmetteur, @PathVariable String idTitre) {
+        return importService.getAllFCRA(idEmetteur, idTitre);
+    }
+
+    @GetMapping("/getFGO/{idEmetteur}/{idTitre}")
+    public List<Import> GetFGO(@PathVariable String idEmetteur, @PathVariable String idTitre) {
+        return importService.getAllFGO(idEmetteur, idTitre);
+    }
+
+    @PostMapping("/traiterFCRA/{idEmetteur}/{idTitre}")
+    public ResponseEntity<Void> traiterFCRA(@PathVariable String idEmetteur, @PathVariable String idTitre) {
+        importService.traiterFCRA(idEmetteur, idTitre);
         return ResponseEntity.ok().build();
     }
 }

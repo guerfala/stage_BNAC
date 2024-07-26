@@ -1,18 +1,17 @@
 package bnac.bnac_emetteur.Services;
 
 import bnac.bnac_emetteur.DTO.ImportDTO;
-import bnac.bnac_emetteur.Entities.Emetteur;
-import bnac.bnac_emetteur.Entities.Import;
-import bnac.bnac_emetteur.Entities.Titre;
-import bnac.bnac_emetteur.Repositories.EmetteurRepo;
-import bnac.bnac_emetteur.Repositories.ImportRepository;
-import bnac.bnac_emetteur.Repositories.TitreRepository;
+import bnac.bnac_emetteur.Entities.*;
+import bnac.bnac_emetteur.Repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,6 +27,24 @@ public class ImportService {
 
     @Autowired
     private TitreRepository titreRepository;
+
+    @Autowired
+    private ActionnaireNRepo actionnaireNRepo;
+
+    @Autowired
+    private NatureAvoirRepository natureAvoirRepository;
+
+    @Autowired
+    private StatusRepo statusRepo;
+
+    @Autowired
+    private TeneurCompteRepo teneurCompteRepo;
+
+    @Autowired
+    private NatureCompteTitreRepository natureCompteTitreRepository;
+
+    @Autowired
+    private Solde_NRepo soldeNRepo;
 
     public void saveImportFCRA(ImportDTO importDto, String idEmetteur) {
         Emetteur emetteur = emetteurRepo.findById(idEmetteur).get();
@@ -127,5 +144,63 @@ public class ImportService {
         importEntity.setTitre(titre);
 
         return importEntity;
+    }
+
+    public List<Import> getAllFCRA(String idEmetteur, String idTitre){
+        return importRepository.findAllFCRA(idEmetteur, idTitre);
+    }
+
+    public List<Import> getAllFGO(String idEmetteur, String idTitre){
+        return importRepository.findAllFGO(idEmetteur, idTitre);
+    }
+
+    public void traiterFCRA(String idEmetteur, String idTitre)
+    {
+        List<Import> imports = importRepository.findAllFCRA(idEmetteur, idTitre);
+
+        int verif = 0;
+        verif = actionnaireNRepo.VerifActionnaire(idEmetteur);
+
+        Emetteur emetteur = emetteurRepo.findById(idEmetteur).get();
+
+        if(verif != 0)
+        {
+            soldeNRepo.deleteAllByTitre(idTitre);
+            actionnaireNRepo.deleteAllByemetteur(emetteur);
+        }
+
+        int matricule = 1;
+
+        for (Import imp : imports)
+        {
+            NatureAvoir natureAvoir = natureAvoirRepository.findByCodeCategorieAvoir(imp.getCav());
+            saveNewActionnaire(imp, emetteur, matricule, natureAvoir);
+            NatureCompteTitre natureCompteTitre = natureCompteTitreRepository.findNatureCompteTitreByLibelleNT(imp.getNatureCompte());
+            saveSolde(imp, emetteur, matricule, natureAvoir, natureCompteTitre);
+            matricule++;
+        }
+    }
+
+    public void saveNewActionnaire(Import imp, Emetteur emetteur, int matricule, NatureAvoir natureAvoir)
+    {
+        Actionnaire_N actionnaire = new Actionnaire_N(matricule, emetteur, imp.getClient(), imp.getNature_id(), imp.getIdentifiant(), imp.getDateBourse(), imp.getDateDeNaissance(), imp.getAdresse(), statusRepo.findBycodeTunCl(imp.getNatureClient()), false, imp.getNationalite(), natureAvoir, LocalDate.now());
+        if (imp.getTypeDeResidence().equals("Resident"))
+            actionnaire.setResident(true);
+
+        actionnaireNRepo.save(actionnaire);
+    }
+
+    public void saveSolde(Import imp, Emetteur emetteur, int matricule, NatureAvoir natureAvoir, NatureCompteTitre natureCompteTitre)
+    {
+        Actionnaire_N actionnaireN = actionnaireNRepo.findActionnaire_NByMatriculeAndEmetteur(matricule, emetteur);
+        TeneurCompte teneurCompte = teneurCompteRepo.findTeneurCompteByLibelleCourt(imp.getTC());
+        System.out.println(teneurCompte);
+
+        Solde_N soldeN = new Solde_N(actionnaireN.getMatricule(), imp.getTitre().getIdTitre(), teneurCompte.getIdTC(), natureCompteTitre.getIdNatureCompteTitre(), natureAvoir.getIdNatureAvoirs(), actionnaireN, imp.getTitre(),
+                teneurCompte, natureCompteTitre, natureAvoir, (int) imp.getSolde().doubleValue(), LocalDateTime.now());
+
+        soldeNRepo.save(soldeN);
+
+        imp.setTreated(true);
     }
 }

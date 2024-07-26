@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 public class Actionnaire_N {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Matricule;
 
     @JoinColumn(name = "IdEmetteur", nullable = false)
@@ -31,16 +30,17 @@ public class Actionnaire_N {
     private String Identifiant;
 
     @Column(nullable = true)
-    private LocalDateTime DateMaj;
+    private LocalDate DateMaj;
 
     @Column(nullable = true)
-    private LocalDateTime Date_Naissance;
+    private LocalDate Date_Naissance;
 
     @Column(nullable = true, length = 128)
     private String Adresse;
 
-    @Column(nullable = true, length = 2)
-    private String IdStatus;
+    @JoinColumn(name = "idStatus", nullable = true)
+    @ManyToOne
+    private Status status;
 
     @Column(nullable = true)
     private boolean Resident;
@@ -53,7 +53,7 @@ public class Actionnaire_N {
     private NatureAvoir natureAvoir;
 
     @Column(nullable = true)
-    private LocalDateTime DateOuverture;
+    private LocalDate DateOuverture;
 
 
 }

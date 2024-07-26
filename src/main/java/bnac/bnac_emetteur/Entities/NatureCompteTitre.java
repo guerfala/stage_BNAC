@@ -18,4 +18,10 @@ public class NatureCompteTitre {
     @Column(length =2,nullable = false)
     private String CodeNatureCompteTitre;
 
+    @Column(length =64,nullable = true)
+    private String codeNT;
+
+    @Column(length =64,nullable = true)
+    private String LibelleNT;
+
 }

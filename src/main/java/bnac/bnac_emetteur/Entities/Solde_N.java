@@ -37,7 +37,7 @@ public class Solde_N {
 
     @ManyToOne
     @JoinColumn(name = "Matricule", insertable = false, updatable = false)
-    private Actionnaire actionnaire;
+    private Actionnaire_N actionnaire;
 
     @ManyToOne
     @JoinColumn(name = "IdTitre", insertable = false, updatable = false)
