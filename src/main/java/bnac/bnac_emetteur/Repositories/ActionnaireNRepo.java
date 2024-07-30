@@ -19,8 +19,14 @@ public interface ActionnaireNRepo extends JpaRepository<Actionnaire_N,Integer> {
     @Transactional
     @Modifying
     @Query("DELETE FROM Actionnaire_N a WHERE a.emetteur = :emetteur")
-    void deleteAllByemetteur(@Param("emetteur") Emetteur emetteur);
+    public void deleteAllByemetteur(@Param("emetteur") Emetteur emetteur);
 
     @Query("select a from Actionnaire_N a where a.Matricule = :matricule and a.emetteur = :emetteur")
-    Actionnaire_N findActionnaire_NByMatriculeAndEmetteur(@Param("matricule") int matricule, @Param("emetteur") Emetteur emetteur);
+    public Actionnaire_N findActionnaire_NByMatriculeAndEmetteur(@Param("matricule") int matricule, @Param("emetteur") Emetteur emetteur);
+
+    @Query("select count(Matricule) from Actionnaire_N where emetteur.idEmetteur = :idEmetteur and Identifiant = :identifiant and Libelle_Client = :libelle ")
+    public int VerifActionnaireFGO(@Param("idEmetteur") String idEmetteur, @Param("identifiant") String identifiant, @Param("libelle") String libelle);
+
+    @Query("select actionnaire from Actionnaire_N actionnaire where actionnaire.emetteur.idEmetteur = :idEmetteur and actionnaire.Identifiant = :identifiant and actionnaire.Libelle_Client = :libelle ")
+    public Actionnaire_N GetActionnaireByIdentifiantAndNom(@Param("idEmetteur") String idEmetteur, @Param("identifiant") String identifiant, @Param("libelle") String libelle);
 }

@@ -32,8 +32,14 @@ public class TypeOperation_N {
 
 
     @Column(nullable = true)
-    private float Sens_Comptable;
+    private Character Sens_Comptable;
 
     @Column(nullable = true, length = 5)
     private String CodeOperation;
+
+    @Column(nullable = true, length = 3)
+    private String CodeOperationCsd;
+
+    @Column(nullable = true)
+    private String LibelleCsd;
 }

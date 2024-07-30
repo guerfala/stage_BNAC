@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,7 +20,7 @@ public class Operation_N {
 
     @ManyToOne
     @JoinColumn(name="Matricule")
-    private Actionnaire actionnaire;
+    private Actionnaire_N actionnaire;
 
     @JoinColumn(name = "IdEmetteur", nullable = false)
     @ManyToOne
@@ -60,4 +61,6 @@ public class Operation_N {
     @Column(nullable = true, length = 16)
     private String NumContrat;
 
+    public Operation_N(Actionnaire_N actionnaireN, Emetteur emetteur, TeneurCompte teneurCompte, NatureCompteTitre natureCompteTitre, NatureAvoir natureAvoir, Titre titre, TypeOperation_N typeOperationN, int quantite, int i, LocalDate dateOperation, LocalDate dateBourse, String numContrat) {
+    }
 }

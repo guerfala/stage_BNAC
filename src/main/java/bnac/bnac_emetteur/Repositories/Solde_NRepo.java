@@ -14,4 +14,20 @@ public interface Solde_NRepo extends JpaRepository<Solde_N, SoldePk> {
     @Modifying
     @Query("DELETE FROM Solde_N s WHERE s.IdTitre = :titre")
     void deleteAllByTitre(@Param("titre") String titre);
+
+    @Query("select s from Solde_N s where s.IdTitre = :idTitre and s.Matricule = :matricule and s.IdTC = :idTC and s.IdNatureCompteTitre = :idNCT and s.IdNatureAvoirs = :idNA")
+    Solde_N VerifSoldeExist(@Param("idTitre") String idTitre, @Param("matricule") int matricule, @Param("idTC") String idTC, @Param("idNCT") int idNCT, @Param("idNA") int idNA);
+
+    @Query("select s from Solde_N s where s.IdTitre = :idTitre and s.Matricule = :matricule and s.IdTC = :idTC and s.IdNatureCompteTitre = 1 and s.IdNatureAvoirs = :idNA")
+    Solde_N GetSoldeMain(@Param("idTitre") String idTitre, @Param("matricule") int matricule, @Param("idTC") String idTC, @Param("idNA") int idNA);
+
+    @Query("select s from Solde_N s where s.IdTitre = :idTitre and s.Matricule = :matricule and s.IdTC = :idTC and s.IdNatureCompteTitre = 7 and s.IdNatureAvoirs = :idNA")
+    Solde_N GetSoldeFrozen(@Param("idTitre") String idTitre, @Param("matricule") int matricule, @Param("idTC") String idTC, @Param("idNA") int idNA);
+
+    @Query("select s from Solde_N s where s.IdTitre = :idTitre and s.Matricule = :matricule and s.IdTC = :idTC and s.IdNatureCompteTitre = 3 and s.IdNatureAvoirs = :idNA")
+    Solde_N GetSoldePledge(@Param("idTitre") String idTitre, @Param("matricule") int matricule, @Param("idTC") String idTC, @Param("idNA") int idNA);
+
+    @Query("select s from Solde_N s where s.IdTitre = :idTitre and s.Matricule = :matricule and s.IdTC = :idTC and s.IdNatureCompteTitre = 4 and s.IdNatureAvoirs = :idNA")
+    Solde_N GetSoldeOpposition(@Param("idTitre") String idTitre, @Param("matricule") int matricule, @Param("idTC") String idTC, @Param("idNA") int idNA);
+
 }
