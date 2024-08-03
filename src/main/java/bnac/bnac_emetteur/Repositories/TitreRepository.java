@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface TitreRepository extends JpaRepository<Titre, String> {
     @Query("SELECT t.LibelleCourt FROM Titre t WHERE t.emetteur.idEmetteur = :emetteurId")
-    List<String> findLibelleCourtByEmetteurId(String emetteurId);}
+    List<String> findLibelleCourtByEmetteurId(String emetteurId);
+    List<Titre> findByEmetteur_IdEmetteur(String idEmetteur);
+}

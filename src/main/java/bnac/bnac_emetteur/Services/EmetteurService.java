@@ -52,5 +52,7 @@ public class EmetteurService {
 
         this.emetteurRepo.save(emetteur1);
     }
-
+    public List<String> getAllEmetteurLibelleCourt() {
+        return emetteurRepo.findAllEmetteurLibelleCourt();
+    }
 }

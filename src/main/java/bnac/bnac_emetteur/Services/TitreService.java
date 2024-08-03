@@ -64,5 +64,9 @@ public class TitreService {
     public List<String> getTitresByEmetteurId(String emetteurId) {
         return titreRepository.findLibelleCourtByEmetteurId(emetteurId);
     }
+    public String getIsin(String id){
+        Titre titre = titreRepository.findById(id).get();
+        return titre.getCodeSISIN();
+    }
 
 }
