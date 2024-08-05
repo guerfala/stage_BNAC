@@ -31,8 +31,8 @@ public class TypeOperation_N {
     private boolean OperationOST;
 
 
-    @Column(nullable = true)
-    private Character Sens_Comptable;
+    @Column(nullable = true, length = 2)
+    private String Sens_Comptable;
 
     @Column(nullable = true, length = 5)
     private String CodeOperation;

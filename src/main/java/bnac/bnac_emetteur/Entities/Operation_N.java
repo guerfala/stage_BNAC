@@ -44,7 +44,7 @@ public class Operation_N {
 
     @JoinColumn(name = "IdTypeOperation", nullable = true)
     @ManyToOne
-    private TypeOperation typeOperation;
+    private TypeOperation_N typeOperation;
 
     @Column(nullable = false)
     private int Quantite;
@@ -53,14 +53,11 @@ public class Operation_N {
     private float Cours;
 
     @Column(nullable = true)
-    private LocalDateTime DateOperation;
+    private LocalDate DateOperation;
 
     @Column(nullable = true)
-    private LocalDateTime DateBourse;
+    private LocalDate DateBourse;
 
     @Column(nullable = true, length = 16)
     private String NumContrat;
-
-    public Operation_N(Actionnaire_N actionnaireN, Emetteur emetteur, TeneurCompte teneurCompte, NatureCompteTitre natureCompteTitre, NatureAvoir natureAvoir, Titre titre, TypeOperation_N typeOperationN, int quantite, int i, LocalDate dateOperation, LocalDate dateBourse, String numContrat) {
-    }
 }

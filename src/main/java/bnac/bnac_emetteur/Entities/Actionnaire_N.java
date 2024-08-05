@@ -26,7 +26,7 @@ public class Actionnaire_N {
     @Column(nullable = true, length = 32)
     private String NaturePiece;
 
-    @Column(nullable = true, length = 16)
+    @Column(nullable = true)
     private String Identifiant;
 
     @Column(nullable = true)

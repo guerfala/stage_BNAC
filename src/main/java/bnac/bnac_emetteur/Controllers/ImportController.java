@@ -132,4 +132,10 @@ public class ImportController {
         importService.traiterFCRA(idEmetteur, idTitre);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/traiterFGO/{idEmetteur}/{idTitre}")
+    public ResponseEntity<Void> traiterFGO(@PathVariable String idEmetteur, @PathVariable String idTitre) {
+        importService.traiterFGO(idEmetteur, idTitre);
+        return ResponseEntity.ok().build();
+    }
 }

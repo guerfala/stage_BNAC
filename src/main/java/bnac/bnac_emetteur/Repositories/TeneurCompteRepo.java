@@ -22,7 +22,7 @@ public interface TeneurCompteRepo extends JpaRepository<TeneurCompte,String> {
             "GROUP BY tc.IdTC, tc.LibelleCourt, nct.CodeNatureCompteTitre, nct.Libelle, nv.CodeCategorieAvoir, nv.Libelle")
     List<TeneurCompteDTO> findTeneurCompteAndSoldeByEmetteurAndTitre(@Param("idTitre") String idTitre, @Param("selectedDate") LocalDateTime selectedDate);
 
-    @Query("select t from TeneurCompte t where t.LibelleCourt= :libelle ")
-    TeneurCompte findTeneurCompteByLibelleCourt(@Param("libelle") String libelle);
+    @Query("select t from TeneurCompte t where t.LibelleCsd= :libelle ")
+    TeneurCompte findTeneurCompteByLibelleCsd(@Param("libelle") String libelle);
 
 }

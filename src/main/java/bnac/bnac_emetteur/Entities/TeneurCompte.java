@@ -59,4 +59,11 @@ public class TeneurCompte {
 
     @Column(nullable = true, length = 3)
     private String CodeIAA;
+
+    @Column(nullable = true)
+    private String LibelleCsd;
+
+    @Column(nullable = true)
+    private String CodeSwift;
+
 }

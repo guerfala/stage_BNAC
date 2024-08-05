@@ -13,8 +13,8 @@ public interface ActionnaireNRepo extends JpaRepository<Actionnaire_N,Integer> {
     @Query("select count(Matricule) from Actionnaire_N where emetteur.idEmetteur = :idEmetteur")
     public int VerifActionnaire(@Param("idEmetteur") String idEmetteur);
 
-    @Query("select Matricule from Actionnaire_N where emetteur.idEmetteur = :idEmetteur order by Matricule desc limit 1")
-    public int GetLastMatricule(@Param("idEmetteur") String idEmetteur);
+    @Query("select a from Actionnaire_N a where a.emetteur.idEmetteur = :idEmetteur order by a.Matricule desc limit 1")
+    public Actionnaire_N GetLastMatricule(@Param("idEmetteur") String idEmetteur);
 
     @Transactional
     @Modifying
@@ -27,6 +27,6 @@ public interface ActionnaireNRepo extends JpaRepository<Actionnaire_N,Integer> {
     @Query("select count(Matricule) from Actionnaire_N where emetteur.idEmetteur = :idEmetteur and Identifiant = :identifiant and Libelle_Client = :libelle ")
     public int VerifActionnaireFGO(@Param("idEmetteur") String idEmetteur, @Param("identifiant") String identifiant, @Param("libelle") String libelle);
 
-    @Query("select actionnaire from Actionnaire_N actionnaire where actionnaire.emetteur.idEmetteur = :idEmetteur and actionnaire.Identifiant = :identifiant and actionnaire.Libelle_Client = :libelle ")
+    @Query("select actionnaire from Actionnaire_N actionnaire where actionnaire.emetteur.idEmetteur = :idEmetteur and actionnaire.Identifiant = :identifiant and actionnaire.Libelle_Client = :libelle")
     public Actionnaire_N GetActionnaireByIdentifiantAndNom(@Param("idEmetteur") String idEmetteur, @Param("identifiant") String identifiant, @Param("libelle") String libelle);
 }
