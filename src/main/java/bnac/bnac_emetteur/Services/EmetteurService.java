@@ -55,4 +55,7 @@ public class EmetteurService {
     public List<String> getAllEmetteurLibelleCourt() {
         return emetteurRepo.findAllEmetteurLibelleCourt();
     }
+    public List<Emetteur> searchEmetteurs(String query) {
+        return emetteurRepo.findByLibelleCourtContaining(query);
+    }
 }

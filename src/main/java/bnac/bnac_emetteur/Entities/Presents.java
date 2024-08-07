@@ -13,12 +13,12 @@ public class Presents implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_emetteur")
+    @JoinColumn(name = "IdEmetteur")
     private Emetteur emetteur;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_type_assemblee")
+    @JoinColumn(name = "IdTypeAssemblee")
     private TypeAssemblee typeAssemblee;
 
     @ManyToOne

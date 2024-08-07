@@ -2,7 +2,9 @@ package bnac.bnac_emetteur.Entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.security.PublicKey;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,8 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="Assemblee")
-@Getter
 @Setter
+@Getter
 
 public class Assemblee {
     @Id
@@ -20,12 +22,12 @@ public class Assemblee {
     private int IdAssemblee;
 
 
-    @OneToOne
-    @JoinColumn(name = "IdTypeAssemblee", nullable = false)
-    private TypeAssemblee typeAssemblee;
-
-    @JoinColumn(name = "IdEmetteur", nullable = false)
     @ManyToOne
+    @JoinColumn(name = "IdTypeAssemblee")
+        private TypeAssemblee typeAssemblee;
+
+    @ManyToOne
+    @JoinColumn(name="IdEmetteur")
     private Emetteur emetteur;
 
     @Column(nullable = true)
@@ -36,7 +38,16 @@ public class Assemblee {
 
     @Column(nullable = true)
     private String Libelle;
+    @Transient
+    public String getIdEmetteur() {
+        return emetteur != null ? emetteur.getIdEmetteur() : null;
+    }
+
+    @Transient
+    public String getIdTypeAseemblee()
+    {
+        return typeAssemblee != null ? typeAssemblee.getIdTypeAssemblee() : null;
 
 
-
+}
 }

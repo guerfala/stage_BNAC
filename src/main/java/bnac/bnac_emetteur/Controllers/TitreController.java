@@ -1,5 +1,6 @@
 package bnac.bnac_emetteur.Controllers;
 
+import bnac.bnac_emetteur.Entities.Assemblee;
 import bnac.bnac_emetteur.Repositories.TitreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,9 @@ public class TitreController {
         Titre createdTitre = titreService.saveTitre(titre);
         return new ResponseEntity<>(createdTitre, HttpStatus.CREATED);
     }
+
+
+
 
     @GetMapping("/getTitreById/{id}")
     public ResponseEntity<Titre> getTitreById(@PathVariable String id) {

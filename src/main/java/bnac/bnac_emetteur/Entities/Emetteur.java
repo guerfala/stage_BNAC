@@ -3,9 +3,7 @@ package bnac.bnac_emetteur.Entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +11,8 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Emetteur {
     @Id
     @Column( length = 16, nullable = false)
@@ -63,6 +63,9 @@ public class Emetteur {
     private Float pourcentage;
 
 
+    public Emetteur(String type) {
+        this.idEmetteur = type;
+    }
 
 
 

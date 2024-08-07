@@ -49,4 +49,11 @@ public class EmetteurController {
     public List<String> getAllEmetteurLibelleCourt() {
         return emetteurService.getAllEmetteurLibelleCourt();
     }
+
+
+    @GetMapping("/emetteurs/search")
+    public ResponseEntity<List<Emetteur>> searchEmetteurs(@RequestParam String query) {
+        List<Emetteur> emetteurs = emetteurService.searchEmetteurs(query);
+        return ResponseEntity.ok(emetteurs);
+    }
 }

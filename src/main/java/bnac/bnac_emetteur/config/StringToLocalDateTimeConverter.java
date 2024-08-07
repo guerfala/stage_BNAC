@@ -1,4 +1,4 @@
-package bnac.bnac_emetteur.Config;
+package bnac.bnac_emetteur.config;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

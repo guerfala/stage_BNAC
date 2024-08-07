@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name="TypeAssemblee")
 
 public class TypeAssemblee {
@@ -18,6 +17,11 @@ public class TypeAssemblee {
 
     @Column(nullable = false)
     private String Libelle;
+public TypeAssemblee(){}
+
+    public TypeAssemblee(String type) {
+        this.IdTypeAssemblee = type;
+    }
 
 
 }

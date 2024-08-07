@@ -1,9 +1,13 @@
 package bnac.bnac_emetteur.Services;
 
 import bnac.bnac_emetteur.Entities.Assemblee;
+import bnac.bnac_emetteur.Entities.Emetteur;
+import bnac.bnac_emetteur.Entities.Titre;
 import bnac.bnac_emetteur.Entities.TypeAssemblee;
 import bnac.bnac_emetteur.Repositories.AssembleeRepository;
+import bnac.bnac_emetteur.Repositories.EmetteurRepo;
 import bnac.bnac_emetteur.Repositories.TypeAssembleeRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,35 +15,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class AssembleeService {
+    private final EmetteurRepo emetteurRepo;
 
-    @Autowired
-    private AssembleeRepository assembleeRepository;
+    private final AssembleeRepository assembleeRepository;
 
-    @Autowired
-    private TypeAssembleeRepository typeAssembleeRepository;
 
-    // Create or Update Assemblee
-    public Assemblee createAssemblee(Assemblee assemblee) {
-        return assembleeRepository.save(assemblee);
-    }
-
-    // Update Assemblee
-    public Assemblee updateAssemblee(int id, Assemblee updatedAssemblee) {
-        return assembleeRepository.findById(id)
-                .map(existingAssemblee -> {
-                    existingAssemblee.setTypeAssemblee(updatedAssemblee.getTypeAssemblee());
-                    existingAssemblee.setEmetteur(updatedAssemblee.getEmetteur());
-                    existingAssemblee.setDateTenue(updatedAssemblee.getDateTenue());
-                    existingAssemblee.setLieu(updatedAssemblee.getLieu());
-                    existingAssemblee.setLibelle(updatedAssemblee.getLibelle());
-                    // Set other fields if needed
-                    return assembleeRepository.save(existingAssemblee);
-                })
-                .orElseThrow(() -> new RuntimeException("Assemblee not found with id " + id));
-    }
-
-    // Read (get all)
     public List<Assemblee> getAllAssemblees() {
         return assembleeRepository.findAll();
     }
@@ -48,12 +30,51 @@ public class AssembleeService {
         return assembleeRepository.findById(id);
     }
 
-    // Delete
+
+    public Assemblee updateAssemblee(int id, Assemblee assembleeDetails) {
+        Assemblee assemblee = assembleeRepository.findById(id).orElseThrow();
+        assemblee.setTypeAssemblee(assembleeDetails.getTypeAssemblee());
+        assemblee.setEmetteur(assembleeDetails.getEmetteur());
+        assemblee.setDateTenue(assembleeDetails.getDateTenue());
+        assemblee.setLieu(assembleeDetails.getLieu());
+        assemblee.setLibelle(assembleeDetails.getLibelle());
+        return assembleeRepository.save(assemblee);
+    }
+
     public void deleteAssemblee(int id) {
         assembleeRepository.deleteById(id);
     }
-
-        public List<TypeAssemblee> getAllTypeAssemblees() {
-            return typeAssembleeRepository.findAll();
+   /* public void savedAssemblee(Assemblee assemblee) {
+        if (assemblee.getEmetteur() == null) {
+            throw new IllegalArgumentException("Emetteur cannot be null");
         }
+        assembleeRepository.save(assemblee);
+    }*/
+
+   /* public Assemblee saveAssemblee(Assemblee assemblee) {
+        // Ensure IdEmetteur and IdTypeAssemblee are set and convert them to entities
+        if (assemblee.getEmetteur() == null && assemblee.getIdEmetteur() != null) {
+            Emetteur emetteur;
+            emetteur = emetteurRepo.findById(assemblee.getIdEmetteur())
+                    .orElseThrow(() -> new RuntimeException("Emetteur not found"));
+            assemblee.setEmetteur(emetteur);
+        }
+
+        if (assemblee.getTypeAssemblee() == null && assemblee.getIdTypeAseemblee() != null) {
+            TypeAssemblee typeAssemblee = typeAssembleeRepository.findById(assemblee.getIdTypeAseemblee())
+                    .orElseThrow(() -> new RuntimeException("TypeAssemblee not found"));
+            assemblee.setTypeAssemblee(typeAssemblee);
+        }
+
+        return assembleeRepository.save(assemblee);
+    }*/
+
+   public Assemblee saveAssemblee(Assemblee assemblee) {
+        if (assemblee.getEmetteur() == null && assemblee.getIdEmetteur() != null) {
+            Emetteur emetteur = emetteurRepo.findById(assemblee.getIdEmetteur())
+                    .orElseThrow(() -> new RuntimeException("Emetteur not found"));
+            assemblee.setEmetteur(emetteur);
+        }
+        return assembleeRepository.save(assemblee);
     }
+}
