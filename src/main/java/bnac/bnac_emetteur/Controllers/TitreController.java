@@ -1,8 +1,6 @@
 package bnac.bnac_emetteur.Controllers;
 
-import bnac.bnac_emetteur.Entities.Assemblee;
 import bnac.bnac_emetteur.Repositories.TitreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +15,13 @@ import java.util.Optional;
 @CrossOrigin("http://localhost:4200")
 public class TitreController {
 
-    @Autowired
     private TitreService titreService;
-    @Autowired
     private TitreRepository titreRepository;
     @PostMapping("/createTitre")
     public ResponseEntity<Titre> createTitre(@RequestBody Titre titre) {
         Titre createdTitre = titreService.saveTitre(titre);
         return new ResponseEntity<>(createdTitre, HttpStatus.CREATED);
     }
-
-
-
 
     @GetMapping("/getTitreById/{id}")
     public ResponseEntity<Titre> getTitreById(@PathVariable String id) {
@@ -71,11 +64,6 @@ public class TitreController {
         List<String> libelleCourts = titreService.getAllTitreLibelleCourt();
         return ResponseEntity.ok(libelleCourts);
     }
-
-
-
-
-
 
     @GetMapping("/{idEmetteur}/titres")
     public List<Titre> getTitresByEmetteur(@PathVariable String idEmetteur) {

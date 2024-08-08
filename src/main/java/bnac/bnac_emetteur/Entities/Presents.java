@@ -1,24 +1,28 @@
 package bnac.bnac_emetteur.Entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.io.Serializable;
 
+@Getter
 @Entity
 @IdClass(PresentsId.class)
 public class Presents implements Serializable {
 
+    // Getters and Setters
     @Id
     @Column(name = "matricule")
     private String matricule;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "IdEmetteur")
+    @JoinColumn(name = "idEmetteur", referencedColumnName = "idEmetteur")
     private Emetteur emetteur;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "IdTypeAssemblee")
+    @JoinColumn(name = "IdTypeAssemblee", referencedColumnName = "IdTypeAssemblee")
     private TypeAssemblee typeAssemblee;
 
     @ManyToOne
@@ -34,41 +38,20 @@ public class Presents implements Serializable {
     @Column(name = "type_presence")
     private String typePresence;
 
-    // Getters and Setters
-    public String getMatricule() {
-        return matricule;
-    }
-
     public void setMatricule(String matricule) {
         this.matricule = matricule;
-    }
-
-    public Emetteur getEmetteur() {
-        return emetteur;
     }
 
     public void setEmetteur(Emetteur emetteur) {
         this.emetteur = emetteur;
     }
 
-    public TypeAssemblee getTypeAssemblee() {
-        return typeAssemblee;
-    }
-
     public void setTypeAssemblee(TypeAssemblee typeAssemblee) {
         this.typeAssemblee = typeAssemblee;
     }
 
-    public Solde_N getSolde() {
-        return solde;
-    }
-
     public void setSolde(Solde_N solde) {
         this.solde = solde;
-    }
-
-    public String getTypePresence() {
-        return typePresence;
     }
 
     public void setTypePresence(String typePresence) {

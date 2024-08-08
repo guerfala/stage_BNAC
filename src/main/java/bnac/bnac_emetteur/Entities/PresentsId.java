@@ -6,14 +6,14 @@ import java.util.Objects;
 public class PresentsId implements Serializable {
 
     private String matricule;
-    private Long emetteur; // Matching the type of Emetteur entity's primary key
-    private Long typeAssemblee; // Matching the type of TypeAssemblee entity's primary key
+    private Emetteur emetteur;
+    private TypeAssemblee typeAssemblee;
 
     // Default constructor
     public PresentsId() {}
 
     // Parameterized constructor
-    public PresentsId(String matricule, Long emetteur, Long typeAssemblee) {
+    public PresentsId(String matricule, Emetteur emetteur, TypeAssemblee typeAssemblee) {
         this.matricule = matricule;
         this.emetteur = emetteur;
         this.typeAssemblee = typeAssemblee;
@@ -28,23 +28,22 @@ public class PresentsId implements Serializable {
         this.matricule = matricule;
     }
 
-    public Long getEmetteur() {
+    public Emetteur getEmetteur() {
         return emetteur;
     }
 
-    public void setEmetteur(Long emetteur) {
+    public void setEmetteur(Emetteur emetteur) {
         this.emetteur = emetteur;
     }
 
-    public Long getTypeAssemblee() {
+    public TypeAssemblee getTypeAssemblee() {
         return typeAssemblee;
     }
 
-    public void setTypeAssemblee(Long typeAssemblee) {
+    public void setTypeAssemblee(TypeAssemblee typeAssemblee) {
         this.typeAssemblee = typeAssemblee;
     }
 
-    // Override equals and hashCode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
