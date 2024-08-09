@@ -3,11 +3,13 @@ import bnac.bnac_emetteur.DTO.ImportDTO;
 import bnac.bnac_emetteur.Entities.Import;
 import bnac.bnac_emetteur.Services.ImportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +26,12 @@ public class ImportController {
     @PostMapping("/importfcra/{idEmetteur}")
     public ResponseEntity<Void> saveImportFCRA(@RequestBody ImportDTO importDto, @PathVariable String idEmetteur) {
         importService.saveImportFCRA(importDto, idEmetteur);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/savefcra/{idEmetteur}")
+    public ResponseEntity<Void> saveFCRA(@RequestBody ImportDTO[] importDto, @PathVariable String idEmetteur) {
+        importService.saveFCRA(importDto, idEmetteur);
         return ResponseEntity.ok().build();
     }
 

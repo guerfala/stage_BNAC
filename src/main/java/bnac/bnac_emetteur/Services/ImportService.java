@@ -3,15 +3,22 @@ package bnac.bnac_emetteur.Services;
 import bnac.bnac_emetteur.DTO.ImportDTO;
 import bnac.bnac_emetteur.Entities.*;
 import bnac.bnac_emetteur.Repositories.*;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -62,6 +69,59 @@ public class ImportService {
         importRepository.save(importEntity);
     }
 
+    public void saveFCRA(ImportDTO[] importDto, String idEmetteur) {
+        Emetteur emetteur = emetteurRepo.findById(idEmetteur).get();
+
+        for (ImportDTO imp : importDto)
+        {
+            Import importEntity = mapToEntityFCRA(imp, emetteur);
+            importEntity.setType_import("FCRA");
+            importRepository.save(importEntity);
+        }
+    }
+
+    /*public void saveImportData(MultipartFile file, String type, String emetteurId, String titreId) throws IOException {
+        List<Import> importList = new ArrayList<>();
+        Emetteur emetteur = emetteurRepo.findById(emetteurId).orElseThrow(() -> new RuntimeException("Emetteur not found"));
+        Titre titre = titreRepository.findById(titreId).orElseThrow(() -> new RuntimeException("Titre not found"));
+
+        Workbook workbook = new XSSFWorkbook(file.getInputStream());
+        Sheet sheet = workbook.getSheetAt(0);
+        Iterator<Row> rows = sheet.iterator();
+
+        while (rows.hasNext()) {
+            Row currentRow = rows.next();
+            if (currentRow.getRowNum() == 0) {
+                continue; // skip header row
+            }
+
+            Import importEntity = new Import();
+
+            importEntity.setClient(currentRow.getCell(1).getStringCellValue());
+            importEntity.setNatureClient(currentRow.getCell(2).getStringCellValue());
+            importEntity.setNationalite(currentRow.getCell(3).getStringCellValue());
+            importEntity.setNature_id(currentRow.getCell(4).getStringCellValue());
+            importEntity.setIdentifiant(currentRow.getCell(5).getStringCellValue());
+            importEntity.setCav(currentRow.getCell(6).getStringCellValue());
+            importEntity.setNatureCompte(currentRow.getCell(7).getStringCellValue());
+            importEntity.setTC(currentRow.getCell(8).getStringCellValue());
+            importEntity.setSolde(currentRow.getCell(9).getNumericCellValue());
+            importEntity.setTypeClient(currentRow.getCell(10).getStringCellValue());
+            importEntity.setCodeSISIN(currentRow.getCell(11).getStringCellValue());
+            importEntity.setTitre(titre);
+            importEntity.setTypeDeResidence(currentRow.getCell(13).getStringCellValue());
+            importEntity.setDateDeNaissance(currentRow.getCell(14).getLocalDateTimeCellValue().toLocalDate());
+            importEntity.setAdresse(currentRow.getCell(15).getStringCellValue());
+            importEntity.setDateBourse(currentRow.getCell(11).getLocalDateTimeCellValue().toLocalDate());
+            importEntity.setEmetteur(emetteur);
+
+            importList.add(importEntity);
+        }
+
+        importRepository.saveAll(importList);
+        workbook.close();
+    }*/
+
     private Import mapToEntityFCRA(ImportDTO importDto, Emetteur emetteur) {
         Import importEntity = new Import();
 
@@ -109,6 +169,7 @@ public class ImportService {
         Emetteur emetteur = emetteurRepo.findById(idEmetteur).get();
         // Map ImportDto to Import entity and save to repository
         Import importEntity = mapToEntityFGO(importDto, emetteur);
+        importEntity.setType_import("FGO");
         importRepository.save(importEntity);
     }
 
