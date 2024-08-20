@@ -25,8 +25,8 @@ public class ExportController {
     @Autowired
     private ExportService exportService;
 
-    @GetMapping("/download/{emetteurId}/{titreId}/{minDate}/{maxDate}")
-    private ResponseEntity<InputStreamResource> download(@PathVariable String emetteurId, @PathVariable String titreId, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate) throws IOException {
+    @GetMapping("/downloadFGO/{emetteurId}/{titreId}/{minDate}/{maxDate}")
+    private ResponseEntity<InputStreamResource> downloadFGO(@PathVariable String emetteurId, @PathVariable String titreId, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate) throws IOException {
 
         String fileName = "FGO.reg";
 
@@ -34,6 +34,21 @@ public class ExportController {
         LocalDate max = maxDate.toLocalDate();
 
         ByteArrayInputStream inputStream = exportService.getRegFileData(emetteurId, titreId, min, max);
+
+        InputStreamResource response = new InputStreamResource(inputStream);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(response);
+    }
+
+    @GetMapping("/downloadFCRA/{emetteurId}/{titreId}/{minDate}/{maxDate}")
+    private ResponseEntity<InputStreamResource> downloadFCRA(@PathVariable String emetteurId, @PathVariable String titreId, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate) throws IOException {
+
+        String fileName = "FCRA.reg";
+
+        ByteArrayInputStream inputStream = exportService.getRegFileDataFCRA(emetteurId, titreId, minDate, maxDate);
 
         InputStreamResource response = new InputStreamResource(inputStream);
 

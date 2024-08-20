@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class FGO {
 
+    private String NumLigne;
     private String CodeBIC;
     private String CodeParticipant;
     private String NatureProp;
@@ -23,7 +24,7 @@ public class FGO {
     private String CategorieInves;
     private String Secteur;
     private String Nationalite;
-    private boolean Resident;
+    private String Resident;
     private String Adresse;
     private String Ville;
     private String Gouvernorat;
@@ -31,7 +32,7 @@ public class FGO {
     private String Tel;
     private String Fax;
     private String Email;
-    private int RefOp;
+    private String RefOp;
     private LocalDate DateOp;
     private LocalDate DateComptable;
     private String CodeOp;
@@ -44,7 +45,7 @@ public class FGO {
     private String TypeCompte;
     private String SousCompte;
     private String CategorieAvoir;
-    private int Quantite;
+    private String Quantite;
     private String CodeBICContrepartie;
     private String LegacyCodeContrepartie;
     private String Pays;
