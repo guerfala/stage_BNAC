@@ -1,61 +1,34 @@
 package bnac.bnac_emetteur.Entities;
 
+import lombok.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Getter
+@Setter
 public class PresentsId implements Serializable {
+    private String idEmetteur;
+    private String IdTypeAssemblee;
+    private int Matricule;
+    private int IdPresent;
 
-    private String matricule;
-    private Emetteur emetteur;
-    private TypeAssemblee typeAssemblee;
-
-    // Default constructor
-    public PresentsId() {}
-
-    // Parameterized constructor
-    public PresentsId(String matricule, Emetteur emetteur, TypeAssemblee typeAssemblee) {
-        this.matricule = matricule;
-        this.emetteur = emetteur;
-        this.typeAssemblee = typeAssemblee;
-    }
-
-    // Getters and Setters
-    public String getMatricule() {
-        return matricule;
-    }
-
-    public void setMatricule(String matricule) {
-        this.matricule = matricule;
-    }
-
-    public Emetteur getEmetteur() {
-        return emetteur;
-    }
-
-    public void setEmetteur(Emetteur emetteur) {
-        this.emetteur = emetteur;
-    }
-
-    public TypeAssemblee getTypeAssemblee() {
-        return typeAssemblee;
-    }
-
-    public void setTypeAssemblee(TypeAssemblee typeAssemblee) {
-        this.typeAssemblee = typeAssemblee;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PresentsId that = (PresentsId) o;
-        return Objects.equals(matricule, that.matricule) &&
-                Objects.equals(emetteur, that.emetteur) &&
-                Objects.equals(typeAssemblee, that.typeAssemblee);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(matricule, emetteur, typeAssemblee);
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(Matricule, idEmetteur, IdTypeAssemblee,IdPresent);
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) return true;
+//        if (obj == null || getClass() != obj.getClass()) return false;
+//        PresentsId that = (PresentsId) obj;
+//        return Objects.equals(Matricule, that.Matricule) &&
+//                Objects.equals(idEmetteur, that.idEmetteur) &&
+//                Objects.equals(IdTypeAssemblee, that.IdTypeAssemblee) ;
+//
+//    }
 }

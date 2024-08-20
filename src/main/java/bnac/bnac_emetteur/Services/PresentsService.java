@@ -15,20 +15,34 @@ public class PresentsService {
     @Autowired
     private PresentsRepository presentsRepository;
 
-    public Presents addPresents(Presents presents) {
+    public List<Presents> getAllPresents() {
+        return presentsRepository.findAll();
+    }
+
+    public Optional<Presents> getPresentsById(PresentsId id) {
+        return presentsRepository.findById(id);
+    }
+
+    public Presents createPresents(Presents presents) {
         return presentsRepository.save(presents);
     }
 
-    public void deletePresents(PresentsId presentsId) {
-        Optional<Presents> presents = presentsRepository.findById(presentsId);
-        if (presents.isPresent()) {
-            presentsRepository.delete(presents.get());
+    public Presents updatePresents(PresentsId id, Presents presents) {
+        Optional<Presents> existingPresents = presentsRepository.findById(id);
+        if (existingPresents.isPresent()) {
+            Presents updatedPresents = existingPresents.get();
+            // Update the fields of the existingPresents with values from the new presents
+            updatedPresents.setDateTenue(presents.getDateTenue());
+            updatedPresents.setEmetteur(presents.getEmetteur());
+            updatedPresents.setTypeAssemblee(presents.getTypeAssemblee());
+            updatedPresents.setActionnaire(presents.getActionnaire());
+            return presentsRepository.save(updatedPresents);
         } else {
-            throw new RuntimeException("Presents not found");
+            return null; // Or handle as you prefer
         }
     }
 
-    public List<Presents> getAllPresents() {
-        return presentsRepository.findAll();
+    public void deletePresents(PresentsId id) {
+        presentsRepository.deleteById(id);
     }
 }

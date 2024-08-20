@@ -16,7 +16,11 @@ public class NatureCompteTitreController {
 
     @Autowired
     private NatureCompteTitreService natureCompteTitreService;
-
+    @GetMapping("/getAllNatureCompteTitres")
+    public ResponseEntity<List<NatureCompteTitre>> getAllNatureCompteTitres() {
+        List<NatureCompteTitre> natureCompteTitres = natureCompteTitreService.getAllNatureCompteTitres();
+        return new ResponseEntity<>(natureCompteTitres, HttpStatus.OK);
+    }
     @PostMapping("/createNatureCompteTitre")
     public ResponseEntity<NatureCompteTitre> createNatureCompteTitre(@RequestBody NatureCompteTitre natureCompteTitre) {
         NatureCompteTitre savedNatureCompteTitre = natureCompteTitreService.saveNatureCompteTitre(natureCompteTitre);
@@ -33,11 +37,7 @@ public class NatureCompteTitreController {
         }
     }
 
-    @GetMapping("/getAllNatureCompteTitres")
-    public ResponseEntity<List<NatureCompteTitre>> getAllNatureCompteTitres() {
-        List<NatureCompteTitre> natureCompteTitres = natureCompteTitreService.getAllNatureCompteTitres();
-        return new ResponseEntity<>(natureCompteTitres, HttpStatus.OK);
-    }
+
 
     @PutMapping("/updateNatureCompteTitre/{id}")
     public ResponseEntity<NatureCompteTitre> updateNatureCompteTitre(@PathVariable("id") int id, @RequestBody NatureCompteTitre updatedNatureCompteTitre) {

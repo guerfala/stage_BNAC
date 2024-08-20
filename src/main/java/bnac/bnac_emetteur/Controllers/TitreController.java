@@ -1,6 +1,7 @@
 package bnac.bnac_emetteur.Controllers;
 
 import bnac.bnac_emetteur.Repositories.TitreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,16 @@ import java.util.Optional;
 @CrossOrigin("http://localhost:4200")
 public class TitreController {
 
-    private TitreService titreService;
+  @Autowired
+  private TitreService titreService;
+    @Autowired
+
     private TitreRepository titreRepository;
+    @GetMapping("/getAllTitres")
+    public List<Titre> getAllTitres() {
+        return titreService.getAllTitres();
+    }
+
     @PostMapping("/createTitre")
     public ResponseEntity<Titre> createTitre(@RequestBody Titre titre) {
         Titre createdTitre = titreService.saveTitre(titre);
@@ -30,10 +39,6 @@ public class TitreController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/getAllTitres")
-    public List<Titre> getAllTitres() {
-        return titreService.getAllTitres();
-    }
 
     @PutMapping("/updateTitre/{id}")
     public ResponseEntity<Titre> updateTitre(@PathVariable String id, @RequestBody Titre updatedTitre) {
