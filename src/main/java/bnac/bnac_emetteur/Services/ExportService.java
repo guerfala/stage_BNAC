@@ -136,33 +136,19 @@ public class ExportService {
     }
 
     public void applyRestrictionsFGO(FGO fgo) {
-        if (fgo.getNumLigne() != null) {
-            fgo.setNumLigne(String.format("%05d", Integer.parseInt(fgo.getNumLigne())));
-        }
+        fgo.setNumLigne(fgo.getNumLigne() != null ? String.format("%05d", Integer.parseInt(fgo.getNumLigne())) : String.format("%5s", " "));
 
-        if (fgo.getCodeBIC() != null) {
-            fgo.setCodeBIC(String.format("%-11s", fgo.getCodeBIC()));
-        }
+        fgo.setCodeBIC(fgo.getCodeBIC() != null ? String.format("%-11s", fgo.getCodeBIC()) : String.format("%-11s", " "));
 
-        if (fgo.getCodeParticipant() != null) {
-            fgo.setCodeParticipant(String.format("%03d", Integer.parseInt(fgo.getCodeParticipant())));
-        }
+        fgo.setCodeParticipant(fgo.getCodeParticipant() != null ? String.format("%03d", Integer.parseInt(fgo.getCodeParticipant())) : String.format("%3s", " "));
 
-        if (fgo.getNatureProp() != null) {
-            fgo.setNatureProp(String.format("%-2s", fgo.getNatureProp()));
-        }
+        fgo.setNatureProp(fgo.getNatureProp() != null ? String.format("%-2s", fgo.getNatureProp()) : String.format("%-2s", " "));
 
-        if (fgo.getNom() != null) {
-            fgo.setNom(String.format("%-100s", fgo.getNom()));
-        }
+        fgo.setNom(fgo.getNom() != null ? String.format("%-100s", fgo.getNom()) : String.format("%-100s", " "));
 
-        if (fgo.getPrenom() != null) {
-            fgo.setPrenom(String.format("%-100s", fgo.getPrenom()));
-        }
+        fgo.setPrenom(fgo.getPrenom() != null ? String.format("%-100s", fgo.getPrenom()) : String.format("%-100s", " "));
 
-        if (fgo.getNomArabe() != null) {
-            fgo.setNomArabe(String.format("%-200s", fgo.getNomArabe()));
-        }
+        fgo.setNomArabe(fgo.getNomArabe() != null ? String.format("%-200s", fgo.getNomArabe()) : String.format("%-200s", " "));
 
         if (fgo.getCodeNaturePiece() != null) {
             switch (fgo.getCodeNaturePiece()) {
@@ -172,150 +158,76 @@ public class ExportService {
                 case "Passeport" -> fgo.setCodeNaturePiece("PS");
                 default -> fgo.setCodeNaturePiece("UI");
             }
+        } else {
+            fgo.setCodeNaturePiece("  ");
         }
 
-        if (fgo.getNumPiece() != null) {
-            fgo.setNumPiece(String.format("%020d", Long.parseLong(fgo.getNumPiece())));
-        }
+        fgo.setNumPiece(fgo.getNumPiece() != null ? String.format("%020d", Long.parseLong(fgo.getNumPiece())) : String.format("%20s", " "));
 
-        if (fgo.getCategorieInves() != null) {
-            fgo.setCategorieInves(String.format("%-2s", fgo.getCategorieInves()));
-        }
+        fgo.setCategorieInves(fgo.getCategorieInves() != null ? String.format("%-2s", fgo.getCategorieInves()) : String.format("%-2s", " "));
 
-        if (fgo.getSecteur() != null) {
-            fgo.setSecteur(String.format("%-2s", fgo.getSecteur()));
-        }
+        fgo.setSecteur(fgo.getSecteur() != null ? String.format("%-2s", fgo.getSecteur()) : String.format("%-2s", " "));
 
-        if (fgo.getNationalite() != null) {
-            fgo.setNationalite(String.format("%-2s", fgo.getNationalite()));
-        }
+        fgo.setNationalite(fgo.getNationalite() != null ? String.format("%-2s", fgo.getNationalite()) : String.format("%-2s", " "));
 
         if (fgo.getDateNaissance() == null) {
-            fgo.setDateNaissance(LocalDate.of(1960,1,1));
+            fgo.setDateNaissance(LocalDate.of(1960, 1, 1));
         }
 
-        if (fgo.getAdresse() != null) {
-            fgo.setAdresse(String.format("%-100s", fgo.getAdresse()));
-        }
+        fgo.setAdresse(fgo.getAdresse() != null ? String.format("%-100s", fgo.getAdresse()) : String.format("%-100s", " "));
 
-        if (fgo.getVille() != null) {
-            fgo.setVille(String.format("%-50s", fgo.getVille()));
-        }
+        fgo.setVille(fgo.getVille() != null ? String.format("%-50s", fgo.getVille()) : String.format("%-50s", " "));
 
-        if (fgo.getGouvernorat() != null) {
-            fgo.setGouvernorat(String.format("%-50s", fgo.getGouvernorat()));
-        }
+        fgo.setGouvernorat(fgo.getGouvernorat() != null ? String.format("%-50s", fgo.getGouvernorat()) : String.format("%-50s", " "));
 
-        if (fgo.getCodePostal() != null) {
-            fgo.setCodePostal(String.format("%-20s", fgo.getCodePostal()));
-        }
+        fgo.setCodePostal(fgo.getCodePostal() != null ? String.format("%-20s", fgo.getCodePostal()) : String.format("%-20s", " "));
 
-        if (fgo.getTel() != null) {
-            fgo.setTel(String.format("%-20s", fgo.getTel()));
-        }
+        fgo.setTel(fgo.getTel() != null ? String.format("%-20s", fgo.getTel()) : String.format("%-20s", " "));
 
-        if (fgo.getFax() != null) {
-            fgo.setFax(String.format("%-20s", fgo.getFax()));
-        }
+        fgo.setFax(fgo.getFax() != null ? String.format("%-20s", fgo.getFax()) : String.format("%-20s", " "));
 
-        if (fgo.getEmail() != null) {
-            fgo.setEmail(String.format("%-50s", fgo.getEmail()));
-        }
+        fgo.setEmail(fgo.getEmail() != null ? String.format("%-50s", fgo.getEmail()) : String.format("%-50s", " "));
 
-        if (fgo.getRefOp() != null) {
-            fgo.setRefOp(String.format("%07d", Integer.parseInt(fgo.getRefOp())));
-        }
+        fgo.setRefOp(fgo.getRefOp() != null ? String.format("%07d", Integer.parseInt(fgo.getRefOp())) : String.format("%7s", " "));
 
-        if (fgo.getCodeOp() != null) {
-            fgo.setCodeOp(String.format("%-2s", fgo.getCodeOp()));
-        }
+        fgo.setCodeOp(fgo.getCodeOp() != null ? String.format("%-2s", fgo.getCodeOp()) : String.format("%-2s", " "));
 
-        if (fgo.getSensOp() != null) {
-            fgo.setSensOp(String.format("%-1s", fgo.getSensOp()));
-        }
+        fgo.setSensOp(fgo.getSensOp() != null ? String.format("%-1s", fgo.getSensOp()) : String.format("%-1s", " "));
 
-        if (fgo.getNumTransaction() != null) {
-            fgo.setNumTransaction(String.format("%-10s", fgo.getNumTransaction()));
-        }
+        fgo.setNumTransaction(fgo.getNumTransaction() != null ? String.format("%-10s", fgo.getNumTransaction()) : String.format("%-10s", " "));
 
-        if (fgo.getCodeISIN() != null) {
-            fgo.setCodeISIN(String.format("%-12s", fgo.getCodeISIN()));
-        }
+        fgo.setCodeISIN(fgo.getCodeISIN() != null ? String.format("%-12s", fgo.getCodeISIN()) : String.format("%-12s", " "));
 
-        if (fgo.getVote() != null) {
-            fgo.setVote(String.format("%-10s", fgo.getVote()));
-        }
+        fgo.setVote(fgo.getVote() != null ? String.format("%-10s", fgo.getVote()) : String.format("%-10s", " "));
 
-        if (fgo.getDividende() != null) {
-            fgo.setDividende(String.format("%-10s", fgo.getDividende()));
-        }
+        fgo.setDividende(fgo.getDividende() != null ? String.format("%-10s", fgo.getDividende()) : String.format("%-10s", " "));
 
-        if (fgo.getDententeurs() != null) {
-            fgo.setDententeurs(String.format("%-10s", fgo.getDententeurs()));
-        }
+        fgo.setDententeurs(fgo.getDententeurs() != null ? String.format("%-10s", fgo.getDententeurs()) : String.format("%-10s", " "));
 
-        if (fgo.getTypeCompte() != null) {
-            fgo.setTypeCompte(String.format("%-1s", fgo.getTypeCompte()));
-        }
+        fgo.setTypeCompte(fgo.getTypeCompte() != null ? String.format("%-1s", fgo.getTypeCompte()) : String.format("%-1s", " "));
 
-        if (fgo.getSousCompte() != null) {
-            fgo.setSousCompte(String.format("%-2s", fgo.getSousCompte()));
-        }
+        fgo.setSousCompte(fgo.getSousCompte() != null ? String.format("%-2s", fgo.getSousCompte()) : String.format("%-2s", " "));
 
-        if (fgo.getCategorieAvoir() != null) {
-            fgo.setCategorieAvoir(String.format("%03d", Integer.parseInt(fgo.getCategorieAvoir())));
-        }
+        fgo.setCategorieAvoir(fgo.getCategorieAvoir() != null ? String.format("%03d", Integer.parseInt(fgo.getCategorieAvoir())) : String.format("%3s", " "));
 
-        if (fgo.getQuantite() != null) {
-            fgo.setQuantite(String.format("%012d", Integer.parseInt(fgo.getQuantite())));
-        }
+        fgo.setQuantite(fgo.getQuantite() != null ? String.format("%012d", Integer.parseInt(fgo.getQuantite())) : String.format("%12s", " "));
 
-        if (fgo.getCodeBICContrepartie() != null) {
-            fgo.setCodeBICContrepartie(String.format("%-11s", fgo.getCodeBICContrepartie()));
-        }
+        fgo.setCodeBICContrepartie(fgo.getCodeBICContrepartie() != null ? String.format("%-11s", fgo.getCodeBICContrepartie()) : String.format("%-11s", " "));
 
-        if (fgo.getLegacyCodeContrepartie() != null) {
-            fgo.setLegacyCodeContrepartie(String.format("%-3s", fgo.getLegacyCodeContrepartie()));
-        }
+        fgo.setLegacyCodeContrepartie(fgo.getLegacyCodeContrepartie() != null ? String.format("%-3s", fgo.getLegacyCodeContrepartie()) : String.format("%-3s", " "));
 
-        if (fgo.getPays() != null) {
-            fgo.setPays(String.format("%-2s", fgo.getPays()));
-        }
-
-        if (fgo.getPays() != null) {
-            fgo.setPays(String.format("%-2s", fgo.getPays()));
-        }
+        fgo.setPays(fgo.getPays() != null ? String.format("%-2s", fgo.getPays()) : String.format("%-2s", " "));
     }
 
     public void applyRestrictionsFCRA(FCRA fcra) {
 
-        if (fcra.getNumLigne() != null) {
-            fcra.setNumLigne(String.format("%05d", Integer.parseInt(fcra.getNumLigne())));
-        }
-
-        if (fcra.getCodeBIC() != null) {
-            fcra.setCodeBIC(String.format("%-11s", fcra.getCodeBIC()));
-        }
-
-        if (fcra.getCodeParticipant() != null) {
-            fcra.setCodeParticipant(String.format("%03d", Integer.parseInt(fcra.getCodeParticipant())));
-        }
-
-        if (fcra.getNatureProp() != null) {
-            fcra.setNatureProp(String.format("%-2s", fcra.getNatureProp()));
-        }
-
-        if (fcra.getNom() != null) {
-            fcra.setNom(String.format("%-100s", fcra.getNom()));
-        }
-
-        if (fcra.getPrenom() != null) {
-            fcra.setPrenom(String.format("%-100s", fcra.getPrenom()));
-        }
-
-        if (fcra.getNomArabe() != null) {
-            fcra.setNomArabe(String.format("%-200s", fcra.getNomArabe()));
-        }
+        fcra.setNumLigne(fcra.getNumLigne() != null ? String.format("%05d", Integer.parseInt(fcra.getNumLigne())) : "     ");
+        fcra.setCodeBIC(fcra.getCodeBIC() != null ? String.format("%-11s", fcra.getCodeBIC()) : "           ");
+        fcra.setCodeParticipant(fcra.getCodeParticipant() != null ? String.format("%03d", Integer.parseInt(fcra.getCodeParticipant())) : "   ");
+        fcra.setNatureProp(fcra.getNatureProp() != null ? String.format("%-2s", fcra.getNatureProp()) : "  ");
+        fcra.setNom(fcra.getNom() != null ? String.format("%-100s", fcra.getNom()) : " ".repeat(100));
+        fcra.setPrenom(fcra.getPrenom() != null ? String.format("%-100s", fcra.getPrenom()) : " ".repeat(100));
+        fcra.setNomArabe(fcra.getNomArabe() != null ? String.format("%-200s", fcra.getNomArabe()) : " ".repeat(200));
 
         if (fcra.getCodeNaturePiece() != null) {
             switch (fcra.getCodeNaturePiece()) {
@@ -325,87 +237,30 @@ public class ExportService {
                 case "Passeport" -> fcra.setCodeNaturePiece("PS");
                 default -> fcra.setCodeNaturePiece("UI");
             }
+        } else {
+            fcra.setCodeNaturePiece("  ");
         }
 
-        if (fcra.getNumPiece() != null) {
-            fcra.setNumPiece(String.format("%20s", fcra.getNumPiece()).replace(' ', '0'));
-        }
-
-        if (fcra.getCategorieInves() != null) {
-            fcra.setCategorieInves(String.format("%-2s", fcra.getCategorieInves()));
-        }
-
-        if (fcra.getSecteur() != null) {
-            fcra.setSecteur(String.format("%-2s", fcra.getSecteur()));
-        }
-
-        if (fcra.getNationalite() != null) {
-            fcra.setNationalite(String.format("%-2s", fcra.getNationalite()));
-        }
-
-        if (fcra.getDateNaissance() == null) {
-            fcra.setDateNaissance(LocalDate.of(1960,1,1));
-        }
-
-        if (fcra.getAdresse() != null) {
-            fcra.setAdresse(String.format("%-100s", fcra.getAdresse()));
-        }
-
-        if (fcra.getVille() != null) {
-            fcra.setVille(String.format("%-50s", fcra.getVille()));
-        }
-
-        if (fcra.getGouvernorat() != null) {
-            fcra.setGouvernorat(String.format("%-50s", fcra.getGouvernorat()));
-        }
-
-        if (fcra.getCodePostal() != null) {
-            fcra.setCodePostal(String.format("%-20s", fcra.getCodePostal()));
-        }
-
-        if (fcra.getTel() != null) {
-            fcra.setTel(String.format("%-20s", fcra.getTel()));
-        }
-
-        if (fcra.getFax() != null) {
-            fcra.setFax(String.format("%-20s", fcra.getFax()));
-        }
-
-        if (fcra.getEmail() != null) {
-            fcra.setEmail(String.format("%-50s", fcra.getEmail()));
-        }
-
-        if (fcra.getCodeISIN() != null) {
-            fcra.setCodeISIN(String.format("%-12s", fcra.getCodeISIN()));
-        }
-
-        if (fcra.getVote() != null) {
-            fcra.setVote(String.format("%-10s", fcra.getVote()));
-        }
-
-        if (fcra.getDividend() != null) {
-            fcra.setDividend(String.format("%-10s", fcra.getDividend()));
-        }
-
-        if (fcra.getRights() != null) {
-            fcra.setRights(String.format("%-10s", fcra.getRights()));
-        }
-
-        if (fcra.getTypeCompte() != null) {
-            fcra.setTypeCompte(String.format("%-1s", fcra.getTypeCompte()));
-        }
-
-        if (fcra.getSousCompte() != null) {
-            fcra.setSousCompte(String.format("%-2s", fcra.getSousCompte()));
-        }
-
-        if (fcra.getCategorieAvoir() != null) {
-            fcra.setCategorieAvoir(String.format("%03d", Integer.parseInt(fcra.getCategorieAvoir())));
-        }
-
-        if (fcra.getQuantite() != null) {
-            fcra.setQuantite(String.format("%012d", Integer.parseInt(fcra.getQuantite())));
-        }
+        fcra.setNumPiece(fcra.getNumPiece() != null ? String.format("%20s", fcra.getNumPiece()).replace(' ', '0') : "00000000000000000000");
+        fcra.setCategorieInves(fcra.getCategorieInves() != null ? String.format("%-2s", fcra.getCategorieInves()) : "  ");
+        fcra.setSecteur(fcra.getSecteur() != null ? String.format("%-2s", fcra.getSecteur()) : "  ");
+        fcra.setNationalite(fcra.getNationalite() != null ? String.format("%-2s", fcra.getNationalite()) : "  ");
+        fcra.setDateNaissance(fcra.getDateNaissance() != null ? fcra.getDateNaissance() : LocalDate.of(1960, 1, 1));
+        fcra.setAdresse(fcra.getAdresse() != null ? String.format("%-100s", fcra.getAdresse()) : " ".repeat(100));
+        fcra.setVille(fcra.getVille() != null ? String.format("%-50s", fcra.getVille()) : " ".repeat(50));
+        fcra.setGouvernorat(fcra.getGouvernorat() != null ? String.format("%-50s", fcra.getGouvernorat()) : " ".repeat(50));
+        fcra.setCodePostal(fcra.getCodePostal() != null ? String.format("%-20s", fcra.getCodePostal()) : " ".repeat(20));
+        fcra.setTel(fcra.getTel() != null ? String.format("%-20s", fcra.getTel()) : " ".repeat(20));
+        fcra.setFax(fcra.getFax() != null ? String.format("%-20s", fcra.getFax()) : " ".repeat(20));
+        fcra.setEmail(fcra.getEmail() != null ? String.format("%-50s", fcra.getEmail()) : " ".repeat(50));
+        fcra.setCodeISIN(fcra.getCodeISIN() != null ? String.format("%-12s", fcra.getCodeISIN()) : " ".repeat(12));
+        fcra.setVote(fcra.getVote() != null ? String.format("%-10s", fcra.getVote()) : " ".repeat(10));
+        fcra.setDividend(fcra.getDividend() != null ? String.format("%-10s", fcra.getDividend()) : " ".repeat(10));
+        fcra.setRights(fcra.getRights() != null ? String.format("%-10s", fcra.getRights()) : " ".repeat(10));
+        fcra.setTypeCompte(fcra.getTypeCompte() != null ? String.format("%-1s", fcra.getTypeCompte()) : " ");
+        fcra.setSousCompte(fcra.getSousCompte() != null ? String.format("%-2s", fcra.getSousCompte()) : "  ");
+        fcra.setCategorieAvoir(fcra.getCategorieAvoir() != null ? String.format("%03d", Integer.parseInt(fcra.getCategorieAvoir())) : "000");
+        fcra.setQuantite(fcra.getQuantite() != null ? String.format("%012d", Integer.parseInt(fcra.getQuantite())) : "000000000000");
     }
 
 }

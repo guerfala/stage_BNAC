@@ -39,7 +39,7 @@ public class OperationController {
     // http://localhost:8081/bnac/ShowAllOperationByTc/{idTitre}/{minDate}/{maxDate}/{idTC}
     @GetMapping("/ShowAllMouvementsByTc/{idTitre}/{minDate}/{maxDate}/{idTC}")
     public List<MouvementsDTO> ShowAllMouvementsByTc(@PathVariable String idTitre, @PathVariable LocalDateTime minDate, @PathVariable LocalDateTime maxDate, @PathVariable String idTC){
-        return operationRepo.findAllMouvementsByTc(idTitre, minDate, maxDate, idTC);
+         return operationRepo.findAllMouvementsByTc(idTitre, minDate, maxDate, idTC);
     }
 
     // http://localhost:8081/bnac/ShowAllOperationByMatricule/{idTitre}/{minDate}/{maxDate}/{idTC}

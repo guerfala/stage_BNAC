@@ -45,6 +45,19 @@ public class ActionnaireDTO {
         this.Solde = Solde;
     }
 
+    public ActionnaireDTO(int Matricule, String RaisonSociale, String IdPays, String Identifiant, String NaturePiece, String LibelleCourt, String CodeNatureCompteTitre, String CodeCategorieAvoir, int Solde, String Adresse) {
+        this.Matricule = Matricule;
+        this.RaisonSociale = RaisonSociale;
+        this.IdPays = IdPays;
+        this.Identifiant = Identifiant;
+        this.NaturePiece = NaturePiece;
+        this.LibelleCourt = LibelleCourt;
+        this.CodeNatureCompteTitre = CodeNatureCompteTitre;
+        this.CodeCategorieAvoir = CodeCategorieAvoir;
+        this.Solde = Solde;
+        this.Adresse = Adresse;
+    }
+
     public ActionnaireDTO(int Matricule, String RaisonSociale, Long SommeSolde) {
         this.Matricule = Matricule;
         this.RaisonSociale = RaisonSociale;
